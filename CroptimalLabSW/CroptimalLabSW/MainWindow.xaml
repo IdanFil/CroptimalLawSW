@@ -1,0 +1,42 @@
+﻿<Controls:MetroWindow x:Class="CroptimalLabSW.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls" 
+        xmlns:local="clr-namespace:CroptimalLabSW"
+        xmlns:views="clr-namespace:CroptimalLabSW.View"
+        mc:Ignorable="d"
+        WindowState="Maximized" Icon="pack://application:,,,/Images/seedling-s.png"
+        Title="Croptimal Lab" Height="350" Width="525">
+    <Controls:MetroWindow.Resources>
+    </Controls:MetroWindow.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FFD3EBFF" Offset="1"/>
+                <GradientStop Color="#FF0B5C9E"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <views:DisplayView/>
+
+    </Grid>
+    <!--<Grid>
+        <Grid ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="3*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <views:DisplayView Grid.Row="1" Margin="5,5,5,5" Grid.Column="1" />
+            <Button Background="Orange" Grid.Column="0" Grid.Row="1" Margin="5,5,5,5" Content="Bla" />
+        </Grid>
+    </Grid>-->
+</Controls:MetroWindow>

@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="CroptimalLabSW.View.MenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CroptimalLabSW.View"
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="700"
+             DataContext="{Binding Source={StaticResource Locator}, Path=MenuViewModel}">
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <Grid ShowGridLines="false">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Custom:Tile x:Name="btnCromameter" Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave" Title="{Binding Chromameter, Source={StaticResource LocStrings}}"
+                     Command="{Binding ChangeDisplayCommand}" CommandParameter="ChromameterView"
+                     Grid.Column="3" Grid.Row="1" Height="Auto" Width="Auto" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+        <Custom:Tile x:Name="btnSettings" Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave" Title="{Binding Settings, Source={StaticResource LocStrings}}"
+                     Grid.Column="10" Grid.Row="3" Height="Auto" Width="Auto"/>
+        <Custom:Tile x:Name="btnResults" Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave" Title="{Binding Results, Source={StaticResource LocStrings}}"
+                     Grid.Column="7" Grid.Row="1" Height="Auto" Width="Auto" Grid.ColumnSpan="4" Grid.RowSpan="2"/>
+        <Custom:Tile x:Name="btnExit" Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave" Title="{Binding Exit, Source={StaticResource LocStrings}}"
+                     Grid.Column="10" Grid.Row="4" Height="Auto" Width="Auto" Command="{Binding ExitCommand}"/>
+        <Custom:Tile Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave"
+                     Grid.Column="9" Grid.Row="3" Height="Auto" Width="Auto"/>
+        <Custom:Tile Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave"
+                     Grid.Column="9" Grid.Row="4" Height="Auto" Width="Auto"/>
+
+        <Custom:Tile Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave" Title="{Binding Elechem, Source={StaticResource LocStrings}}"
+                     Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Height="Auto" Width="Auto"/>
+        <Custom:Tile Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave" Title="{Binding NIR, Source={StaticResource LocStrings}}"
+                     Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Height="Auto" Width="Auto"/>
+        <Custom:Tile Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave" Title="{Binding Xray, Source={StaticResource LocStrings}}"
+                     Grid.Column="5" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Height="Auto" Width="Auto"/>
+        <Custom:Tile Style="{StaticResource menuTile}" MouseEnter="mouseEnter" MouseLeave="mouseLeave"
+                     Grid.Column="7" Grid.Row="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Height="Auto" Width="Auto"/>
+        
+
+    </Grid>
+</UserControl>

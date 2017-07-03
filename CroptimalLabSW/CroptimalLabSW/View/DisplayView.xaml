@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="CroptimalLabSW.View.DisplayView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CroptimalLabSW.View"
+             xmlns:converters="clr-namespace:CroptimalLabSW.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="1200"
+             DataContext="{Binding Source={StaticResource Locator}, Path=DisplayViewModel}">
+    <UserControl.Resources>
+        <converters:StringToUserControlConverter x:Key="stringToUserControlConverter"/>
+        <converters:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid Name="gridDisplay">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="1.5*"/>
+        </Grid.RowDefinitions>
+        <ContentControl Name="conControlChange" Margin="80,10,80,10" Grid.Row="1" Content="{Binding ContentControlView, Converter={StaticResource stringToUserControlConverter}}"/>
+            <ContentControl  Grid.Row="2" Visibility="{Binding MenuVisibility, Converter={StaticResource booleanToVisibilityConverter}}">
+            <local:BottomMenuView/>
+        </ContentControl>
+
+        <Grid Name="gridLogo" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Grid.Column="0" Source="/Images/Croptimal.png" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="CroptimalLabSW.View.ChromaCalibrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CroptimalLabSW.View"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:oxy="http://oxyplot.org/wpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="900" d:DesignWidth="1600"
+             DataContext="{Binding Source={StaticResource Locator}, Path=ChromaCalibrationViewModel}">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource MetroTextBlock}">
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="GroupBox" BasedOn="{StaticResource MetroGroupBox}">
+            <Setter Property="Margin" Value="100,0,100,0"/>
+            <Setter Property="Background" Value="#FF4B97C3"/>
+            <Setter Property="BorderBrush" Value="#FF4B97C3"/>
+            <Setter Property="Foreground" Value="#FF4B97C3"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="50,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox x:Name="gBoxMeasure" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Measurment, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="6"/>
+        <GroupBox x:Name="gBoxCalculate" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Calculation, Source={StaticResource LocStrings}}"  Grid.Row="7" Grid.RowSpan="4"/>
+        <GroupBox x:Name="gBoxSave" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Save, Source={StaticResource LocStrings}}"  Grid.Row="11" Grid.RowSpan="7"/>
+        <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Average, Source={StaticResource LocStrings}}" Margin="5"/>
+        <TextBox Name="tBoxAVG" Grid.Column="2" Grid.Row="2" Margin="5"/>
+        <Button Name="btnReadBG" Grid.Column="3" Grid.Row="2" Content="{Binding ReadBG, Source={StaticResource LocStrings}}" Margin="5"/>
+        <TextBlock Grid.Column="1" Grid.Row="3" Text="{Binding Repetitions, Source={StaticResource LocStrings}}" Margin="5"/>
+        <TextBox Name="tBoxRep" Grid.Column="2" Grid.Row="3" Margin="5"/>
+        <TextBlock Grid.Column="1" Grid.Row="4" Text="{Binding Concentration, Source={StaticResource LocStrings}}" Margin="5"/>
+        <TextBox Name="tBoxConcentration" Grid.Column="2" Grid.Row="4" Margin="5"/>
+        <Button Name="btnMeasure" Grid.Column="2" Grid.Row="5" Content="{Binding Measure, Source={StaticResource LocStrings}}" Margin="5"/>
+        <TextBlock Grid.Column="1" Grid.Row="8" Text="{Binding PolynomicOrder, Source={StaticResource LocStrings}}" Margin="5"/>
+        <ComboBox x:Name="cBoxPolinomic" Grid.Column="2" Grid.Row="8" Margin="5"/>
+        <Button Name="btnCalculate" Grid.Column="3" Grid.Row="8" Content="{Binding Calculate, Source={StaticResource LocStrings}}" Margin="5"/>
+        <TextBlock Grid.Column="1" Grid.Row="9" HorizontalAlignment="Right" Text="{Binding R2, Source={StaticResource LocStrings}}" Margin="5"/>
+        <TextBox Name="tBoxR" IsEnabled="False" Grid.Column="2" Grid.Row="9" Margin="5"/>
+        <RadioButton Name="rbtnNew" Grid.Column="1" Grid.Row="12" Content="{Binding New, Source={StaticResource LocStrings}}"/>
+        <TextBlock Grid.Column="1" Grid.Row="13" Margin="30,0,0,0" Text="{Binding ElementName, Source={StaticResource LocStrings}}"/>
+        <RadioButton Name="rbtnEdit" Grid.Column="1" Grid.Row="14" Content="{Binding Edit, Source={StaticResource LocStrings}}"/>
+        <TextBox Name="tBoxElementName" IsEnabled="{Binding ElementName=rbtnNew, Path=IsChecked}" Grid.Column="2" Grid.Row="13" Margin="5"/>
+        <TextBlock Grid.Column="1" Grid.Row="15" Text="{Binding SelectElement, Source={StaticResource LocStrings}}" Margin="30,0,0,0"/>
+        <Button Name="btnSave" Grid.Column="2" Grid.Row="16" Content="{Binding SaveCalibration, Source={StaticResource LocStrings}}" Margin="5"/>
+        <ComboBox x:Name="cBoxSelectElement" Grid.Column="2" Grid.Row="15" IsEnabled="{Binding ElementName=rbtnEdit, Path=IsChecked}" Margin="5"/>
+        <oxy:PlotView x:Name="Plot1" Model="{Binding PlotModel}" Grid.Row="1" Grid.RowSpan="17" Grid.Column="5" Grid.ColumnSpan="6" Background="Transparent"/>
+
+
+    </Grid>
+</UserControl>
