@@ -53,6 +53,3 @@ C:\Users\user\Documents\Visual Studio 2015\Projects\CroptimalLabSW\CroptimalLabS
 C:\Users\user\Documents\Visual Studio 2015\Projects\CroptimalLabSW\CroptimalLabSW\bin\Debug\OxyPlot.Wpf.pdb
 C:\Users\user\Documents\Visual Studio 2015\Projects\CroptimalLabSW\CroptimalLabSW\bin\Debug\OxyPlot.Wpf.xml
 C:\Users\user\documents\visual studio 2015\Projects\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.csprojResolveAssemblyReference.cache
-D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\CroptimalLabSW.exe.config
-D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.exe
-D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.pdb
