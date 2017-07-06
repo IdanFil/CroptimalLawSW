@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------------
 
 using CroptimalLabSW.View;
+using MahApps.Metro.Controls;
 using System;
 using System.Diagnostics;
 using System.Windows;
@@ -40,6 +41,134 @@ namespace CroptimalLabSW.View {
     /// </summary>
     public partial class ChromaConfigurationView : System.Windows.Controls.UserControl, System.Windows.Markup.IComponentConnector {
         
+        
+        #line 69 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchLEDA;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 70 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchLEDB;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 71 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchLEDC;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 72 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchLEDD;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 73 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchLEDE;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 74 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchLEDF;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 75 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchLEDG;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 76 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchLEDH;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 77 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchDetectorA;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 78 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchDetectorB;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 79 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchDetectorC;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 80 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchDetectorD;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 81 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchDetectorE;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 82 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchDetectorF;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 83 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchDetectorG;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 84 "..\..\..\View\ChromaConfigurationView.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal MahApps.Metro.Controls.ToggleSwitch switchDetectorH;
+        
+        #line default
+        #line hidden
+        
         private bool _contentLoaded;
         
         /// <summary>
@@ -68,6 +197,57 @@ namespace CroptimalLabSW.View {
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily")]
         void System.Windows.Markup.IComponentConnector.Connect(int connectionId, object target) {
+            switch (connectionId)
+            {
+            case 1:
+            this.switchLEDA = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 2:
+            this.switchLEDB = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 3:
+            this.switchLEDC = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 4:
+            this.switchLEDD = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 5:
+            this.switchLEDE = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 6:
+            this.switchLEDF = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 7:
+            this.switchLEDG = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 8:
+            this.switchLEDH = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 9:
+            this.switchDetectorA = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 10:
+            this.switchDetectorB = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 11:
+            this.switchDetectorC = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 12:
+            this.switchDetectorD = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 13:
+            this.switchDetectorE = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 14:
+            this.switchDetectorF = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 15:
+            this.switchDetectorG = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            case 16:
+            this.switchDetectorH = ((MahApps.Metro.Controls.ToggleSwitch)(target));
+            return;
+            }
             this._contentLoaded = true;
         }
     }

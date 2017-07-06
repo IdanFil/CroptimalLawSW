@@ -1,12 +1,86 @@
-﻿<UserControl x:Class="CroptimalLabSW.View.ChromaConfigurationView"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CroptimalLabSW.View"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             x:Class="CroptimalLabSW.View.ChromaConfigurationView"
+             mc:Ignorable="d"
+             d:DesignHeight="900" d:DesignWidth="1600">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--Text blocks-->
+        <TextBlock Text="LED 1" Grid.Column="4" Grid.Row="1"/>
+        <TextBlock Text="LED 2" Grid.Column="4" Grid.Row="2"/>
+        <TextBlock Text="LED 3" Grid.Column="4" Grid.Row="3"/>
+        <TextBlock Text="LED 4" Grid.Column="4" Grid.Row="4"/>
+        <TextBlock Text="LED 5" Grid.Column="4" Grid.Row="5"/>
+        <TextBlock Text="LED 6" Grid.Column="4" Grid.Row="6"/>
+        <TextBlock Text="LED 7" Grid.Column="4" Grid.Row="7"/>
+        <TextBlock Text="LED 8" Grid.Column="4" Grid.Row="8"/>
+        <TextBlock Text="Detector 1" Grid.Column="7" Grid.Row="1"/>
+        <TextBlock Text="Detector 2" Grid.Column="7" Grid.Row="2"/>
+        <TextBlock Text="Detector 3" Grid.Column="7" Grid.Row="3"/>
+        <TextBlock Text="Detector 4" Grid.Column="7" Grid.Row="4"/>
+        <TextBlock Text="Detector 5" Grid.Column="7" Grid.Row="5"/>
+        <TextBlock Text="Detector 6" Grid.Column="7" Grid.Row="6"/>
+        <TextBlock Text="Detector 7" Grid.Column="7" Grid.Row="7"/>
+        <TextBlock Text="Detector 8" Grid.Column="7" Grid.Row="8"/>
+        <!--ToggleSwitch-->
+        <mah:ToggleSwitch Name="switchLEDA" Grid.Column="5" Grid.Row="1"/>
+        <mah:ToggleSwitch Name="switchLEDB" Grid.Column="5" Grid.Row="2"/>
+        <mah:ToggleSwitch Name="switchLEDC" Grid.Column="5" Grid.Row="3"/>
+        <mah:ToggleSwitch Name="switchLEDD" Grid.Column="5" Grid.Row="4"/>
+        <mah:ToggleSwitch Name="switchLEDE" Grid.Column="5" Grid.Row="5"/>
+        <mah:ToggleSwitch Name="switchLEDF" Grid.Column="5" Grid.Row="6"/>
+        <mah:ToggleSwitch Name="switchLEDG" Grid.Column="5" Grid.Row="7"/>
+        <mah:ToggleSwitch Name="switchLEDH" Grid.Column="5" Grid.Row="8"/>
+        <mah:ToggleSwitch Name="switchDetectorA" Grid.Column="8" Grid.Row="1"/>
+        <mah:ToggleSwitch Name="switchDetectorB" Grid.Column="8" Grid.Row="2"/>
+        <mah:ToggleSwitch Name="switchDetectorC" Grid.Column="8" Grid.Row="3"/>
+        <mah:ToggleSwitch Name="switchDetectorD" Grid.Column="8" Grid.Row="4"/>
+        <mah:ToggleSwitch Name="switchDetectorE" Grid.Column="8" Grid.Row="5"/>
+        <mah:ToggleSwitch Name="switchDetectorF" Grid.Column="8" Grid.Row="6"/>
+        <mah:ToggleSwitch Name="switchDetectorG" Grid.Column="8" Grid.Row="7"/>
+        <mah:ToggleSwitch Name="switchDetectorH" Grid.Column="8" Grid.Row="8"/>
     </Grid>
 </UserControl>

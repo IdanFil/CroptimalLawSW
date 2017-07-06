@@ -30,6 +30,7 @@ D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\Dictionaries\St
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\MainWindow.g.cs
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\BottomMenuView.g.cs
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\ChromaCalibrationView.g.cs
+D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\ChromaConfigurationView.g.cs
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\ChromameterView.g.cs
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\DisplayView.g.cs
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\MenuView.g.cs
@@ -41,6 +42,7 @@ D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\App.baml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\MainWindow.baml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\BottomMenuView.baml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\ChromaCalibrationView.baml
+D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\ChromaConfigurationView.baml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\ChromameterView.baml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\DisplayView.baml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\MenuView.baml
@@ -52,6 +54,3 @@ D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\ru-RU\CroptimalLabSW.resources.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.exe
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.pdb
-D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.csprojResolveAssemblyReference.cache
-D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\ChromaConfigurationView.g.cs
-D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\ChromaConfigurationView.baml

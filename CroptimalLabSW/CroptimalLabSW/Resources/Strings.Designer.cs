@@ -160,15 +160,6 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to hgf.
-        /// </summary>
-        public static string jhj {
-            get {
-                return ResourceManager.GetString("jhj", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Measure.
         /// </summary>
         public static string Measure {
