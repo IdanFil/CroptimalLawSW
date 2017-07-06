@@ -142,11 +142,29 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to f.
+        /// </summary>
+        public static string f {
+            get {
+                return ResourceManager.GetString("f", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hgf.
+        /// </summary>
+        public static string jhj {
+            get {
+                return ResourceManager.GetString("jhj", resourceCulture);
             }
         }
         

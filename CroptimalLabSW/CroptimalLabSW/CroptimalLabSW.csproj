@@ -93,7 +93,11 @@
     <Compile Include="Messages\IsCheckedBottomMenuMessage.cs" />
     <Compile Include="Messages\VisibilityBottomMenuMessage.cs" />
     <Compile Include="Messages\SwitchDisplayMessage.cs" />
-    <Compile Include="Model\ChromaCalibrationModel.cs" />
+    <Compile Include="Model\Chromameter\ChromaCalibrationModel.cs" />
+    <Compile Include="Model\DB\DBConnection.cs" />
+    <Compile Include="Model\DB\DBOptions.cs" />
+    <Compile Include="Model\Generel\Log.cs" />
+    <Compile Include="Model\Generel\Logger.cs" />
     <Compile Include="Resources\Strings.ru-RU.Designer.cs">
       <DependentUpon>Strings.ru-RU.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -115,6 +119,9 @@
     </Compile>
     <Compile Include="View\ChromaCalibrationView.xaml.cs">
       <DependentUpon>ChromaCalibrationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChromaConfigurationView.xaml.cs">
+      <DependentUpon>ChromaConfigurationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ChromameterView.xaml.cs">
       <DependentUpon>ChromameterView.xaml</DependentUpon>
@@ -146,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ChromaCalibrationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChromaConfigurationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

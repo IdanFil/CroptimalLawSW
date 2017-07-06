@@ -57,7 +57,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="gBoxMeasure" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Measurment, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="6"/>
+        <GroupBox x:Name="gBoxMeasure" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Measurment, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="6" Foreground="{x:Null}"/>
         <GroupBox x:Name="gBoxCalculate" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Calculation, Source={StaticResource LocStrings}}"  Grid.Row="7" Grid.RowSpan="4"/>
         <GroupBox x:Name="gBoxSave" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Save, Source={StaticResource LocStrings}}"  Grid.Row="11" Grid.RowSpan="7"/>
         <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Average, Source={StaticResource LocStrings}}" Margin="5"/>
@@ -79,7 +79,7 @@
         <TextBox Name="tBoxElementName" IsEnabled="{Binding ElementName=rbtnNew, Path=IsChecked}" Grid.Column="2" Grid.Row="13" Margin="5"/>
         <TextBlock Grid.Column="1" Grid.Row="15" Text="{Binding SelectElement, Source={StaticResource LocStrings}}" Margin="30,0,0,0"/>
         <Button Name="btnSave" Grid.Column="2" Grid.Row="16" Content="{Binding SaveCalibration, Source={StaticResource LocStrings}}" Margin="5"/>
-        <ComboBox x:Name="cBoxSelectElement" Grid.Column="2" Grid.Row="15" IsEnabled="{Binding ElementName=rbtnEdit, Path=IsChecked}" Margin="5"/>
+        <ComboBox x:Name="cBoxSelectElement" ItemsSource="{Binding ElementsList}" Grid.Column="2" Grid.Row="15" IsEnabled="{Binding ElementName=rbtnEdit, Path=IsChecked}" Margin="5"/>
         <oxy:PlotView x:Name="Plot1" Model="{Binding PlotModel}" Grid.Row="1" Grid.RowSpan="17" Grid.Column="5" Grid.ColumnSpan="6" Background="Transparent"/>
 
 
