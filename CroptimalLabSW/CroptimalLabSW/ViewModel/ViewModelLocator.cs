@@ -127,5 +127,19 @@ namespace CroptimalLabSW.ViewModel
             }
         }
 
+        private ChromaConfigurationViewModel m_chromaConfigurationViewModel;
+
+        public ChromaConfigurationViewModel ChromaConfigurationViewModel
+        {
+            get
+            {
+                if (m_chromaConfigurationViewModel == null)
+                {
+                    m_chromaConfigurationViewModel = new ChromaConfigurationViewModel();
+                }
+                return m_chromaConfigurationViewModel;
+            }
+        }
+
     }
 }

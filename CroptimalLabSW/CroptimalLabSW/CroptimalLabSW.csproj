@@ -89,11 +89,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringToBrushConverter.cs" />
     <Compile Include="Converters\StringToUserControlConverter.cs" />
     <Compile Include="Messages\IsCheckedBottomMenuMessage.cs" />
     <Compile Include="Messages\VisibilityBottomMenuMessage.cs" />
     <Compile Include="Messages\SwitchDisplayMessage.cs" />
     <Compile Include="Model\Chromameter\ChromaCalibrationModel.cs" />
+    <Compile Include="Model\Chromameter\ChromaManage.cs" />
+    <Compile Include="Model\Chromameter\ChromaConfigurationModel.cs" />
     <Compile Include="Model\DB\DBConnection.cs" />
     <Compile Include="Model\DB\DBOptions.cs" />
     <Compile Include="Model\Generel\Log.cs" />
@@ -110,6 +113,7 @@
     </Compile>
     <Compile Include="ViewModel\BottomMenuViewModel.cs" />
     <Compile Include="ViewModel\ChromaCalibrationViewModel.cs" />
+    <Compile Include="ViewModel\ChromaConfigurationViewModel.cs" />
     <Compile Include="ViewModel\DisplayViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
@@ -209,7 +213,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Croptimal\Nando\IoController\IoControllerComm\IoControllerComm.csproj">
+      <Project>{d823869d-3f7f-4dff-8088-c195172f999a}</Project>
+      <Name>IoControllerComm</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Croptimal.png" />
     <Resource Include="Images\seedling-s.png" />

@@ -32,6 +32,11 @@
             <TabItem Header="Real Time">
                 <Grid/>
             </TabItem>
+            <TabItem Header="Configuration">
+                <Grid Name="configurationGrid">
+                    <local:ChromaConfigurationView/>
+                </Grid>
+            </TabItem>
         </mah:MetroTabControl>
 
     </Border>

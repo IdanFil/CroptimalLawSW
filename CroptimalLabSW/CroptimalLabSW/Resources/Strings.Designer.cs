@@ -61,6 +61,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Configuration.
+        /// </summary>
+        public static string AddConfiguration {
+            get {
+                return ResourceManager.GetString("AddConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Average.
         /// </summary>
         public static string Average {
@@ -115,6 +124,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Configuration.
+        /// </summary>
+        public static string EditConfiguration {
+            get {
+                return ResourceManager.GetString("EditConfiguration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Elechem.
         /// </summary>
         public static string Elechem {
@@ -129,6 +147,15 @@ namespace CroptimalLabSW.Resources {
         public static string ElementName {
             get {
                 return ResourceManager.GetString("ElementName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exists name.
+        /// </summary>
+        public static string ExistsName {
+            get {
+                return ResourceManager.GetString("ExistsName", resourceCulture);
             }
         }
         
@@ -156,6 +183,24 @@ namespace CroptimalLabSW.Resources {
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid name.
+        /// </summary>
+        public static string InvalidName {
+            get {
+                return ResourceManager.GetString("InvalidName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LEDs Update.
+        /// </summary>
+        public static string LEDsUpdate {
+            get {
+                return ResourceManager.GetString("LEDsUpdate", resourceCulture);
             }
         }
         
@@ -250,6 +295,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save And Edit.
+        /// </summary>
+        public static string SaveAndEdit {
+            get {
+                return ResourceManager.GetString("SaveAndEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Calibration.
         /// </summary>
         public static string SaveCalibration {
@@ -273,6 +327,42 @@ namespace CroptimalLabSW.Resources {
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Short name.
+        /// </summary>
+        public static string ShortName {
+            get {
+                return ResourceManager.GetString("ShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update LEDs.
+        /// </summary>
+        public static string UpdateLEDs {
+            get {
+                return ResourceManager.GetString("UpdateLEDs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warm Up.
+        /// </summary>
+        public static string WarmUp {
+            get {
+                return ResourceManager.GetString("WarmUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warm Up Time [Sec].
+        /// </summary>
+        public static string WarmUpTime {
+            get {
+                return ResourceManager.GetString("WarmUpTime", resourceCulture);
             }
         }
         

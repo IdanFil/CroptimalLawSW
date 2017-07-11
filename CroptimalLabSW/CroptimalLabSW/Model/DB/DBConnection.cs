@@ -110,9 +110,8 @@ namespace CroptimalLabSW.Model.DB
             return oResult;
         }
 
-        public object ExecuteWriteCommand(string sCommand)
+        public bool ExecuteWriteCommand(string sCommand)
         {
-            object oResult = null;
             try
             {
                 Connect();
@@ -122,18 +121,20 @@ namespace CroptimalLabSW.Model.DB
                     {
                         cmd.ExecuteNonQuery();
                     }
+                    return true;
                 }
+                return false;
             }
             catch (Exception ex)
             {
                 logger.WriteLog(c_className, "Execute write command failed");
                 logger.WriteLog(c_className, "Exception-" + ex.Message);
+                return false;
             }
             finally
             {
                 Disonnect();
             }
-            return oResult;
         }
     }
 }

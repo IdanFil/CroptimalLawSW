@@ -5,12 +5,14 @@ D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\ru-RU\Croptimal
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\GalaSoft.MvvmLight.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\GalaSoft.MvvmLight.Extras.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\GalaSoft.MvvmLight.Platform.dll
+D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\IoControllerComm.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\MahApps.Metro.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\Microsoft.Practices.ServiceLocation.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\OxyPlot.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\OxyPlot.Wpf.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\System.Web.Mvc.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\System.Windows.Interactivity.dll
+D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\IoControllerComm.pdb
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\GalaSoft.MvvmLight.pdb
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\GalaSoft.MvvmLight.xml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\GalaSoft.MvvmLight.Extras.pdb
@@ -26,6 +28,7 @@ D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\OxyPlot.xml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\OxyPlot.Wpf.pdb
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\OxyPlot.Wpf.xml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\System.Web.Mvc.xml
+D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.csprojResolveAssemblyReference.cache
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\Dictionaries\StandardStyles.baml
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\MainWindow.g.cs
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\View\BottomMenuView.g.cs

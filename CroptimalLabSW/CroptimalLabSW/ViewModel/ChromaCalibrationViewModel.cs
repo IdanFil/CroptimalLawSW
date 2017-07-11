@@ -20,7 +20,6 @@ namespace CroptimalLabSW.ViewModel
 
         private PlotModel _plotModel;
         private ChromaCalibrationModel _chromaCalibrationModel;
-        private ObservableCollection<string> _elementsList;
 
         #region Constructor
         public ChromaCalibrationViewModel()

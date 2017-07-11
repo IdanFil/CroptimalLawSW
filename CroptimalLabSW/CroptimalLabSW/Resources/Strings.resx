@@ -193,4 +193,34 @@
   <data name="f" xml:space="preserve">
     <value>f</value>
   </data>
+  <data name="LEDsUpdate" xml:space="preserve">
+    <value>LEDs Update</value>
+  </data>
+  <data name="UpdateLEDs" xml:space="preserve">
+    <value>Update LEDs</value>
+  </data>
+  <data name="AddConfiguration" xml:space="preserve">
+    <value>Add Configuration</value>
+  </data>
+  <data name="EditConfiguration" xml:space="preserve">
+    <value>Edit Configuration</value>
+  </data>
+  <data name="SaveAndEdit" xml:space="preserve">
+    <value>Save And Edit</value>
+  </data>
+  <data name="WarmUp" xml:space="preserve">
+    <value>Warm Up</value>
+  </data>
+  <data name="ExistsName" xml:space="preserve">
+    <value>Exists name</value>
+  </data>
+  <data name="InvalidName" xml:space="preserve">
+    <value>Invalid name</value>
+  </data>
+  <data name="WarmUpTime" xml:space="preserve">
+    <value>Warm Up Time [Sec]</value>
+  </data>
+  <data name="ShortName" xml:space="preserve">
+    <value>Short name</value>
+  </data>
 </root>

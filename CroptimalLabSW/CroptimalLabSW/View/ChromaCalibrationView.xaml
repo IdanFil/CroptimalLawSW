@@ -10,15 +10,9 @@
              d:DesignHeight="900" d:DesignWidth="1600"
              DataContext="{Binding Source={StaticResource Locator}, Path=ChromaCalibrationViewModel}">
     <UserControl.Resources>
-        <Style TargetType="TextBlock" BasedOn="{StaticResource MetroTextBlock}">
+        <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <Style TargetType="GroupBox" BasedOn="{StaticResource MetroGroupBox}">
-            <Setter Property="Margin" Value="100,0,100,0"/>
-            <Setter Property="Background" Value="#FF4B97C3"/>
-            <Setter Property="BorderBrush" Value="#FF4B97C3"/>
-            <Setter Property="Foreground" Value="#FF4B97C3"/>
         </Style>
     </UserControl.Resources>
     <Grid Margin="50,0,0,0">
@@ -57,7 +51,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="gBoxMeasure" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Measurment, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="6" Foreground="{x:Null}"/>
+        <GroupBox x:Name="gBoxMeasure" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Measurment, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="6"/>
         <GroupBox x:Name="gBoxCalculate" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Calculation, Source={StaticResource LocStrings}}"  Grid.Row="7" Grid.RowSpan="4"/>
         <GroupBox x:Name="gBoxSave" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Save, Source={StaticResource LocStrings}}"  Grid.Row="11" Grid.RowSpan="7"/>
         <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Average, Source={StaticResource LocStrings}}" Margin="5"/>
