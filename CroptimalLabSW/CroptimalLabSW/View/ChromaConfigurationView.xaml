@@ -9,6 +9,8 @@
              x:Class="CroptimalLabSW.View.ChromaConfigurationView"
              mc:Ignorable="d"
              d:DesignHeight="900" d:DesignWidth="1600"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             Dialog:DialogParticipation.Register="{Binding}"
              DataContext="{Binding Source={StaticResource Locator}, Path=ChromaConfigurationViewModel}">
     <UserControl.Resources>
         <converters:StringToBrushConverter x:Key="stringToBrushConverter"/>
@@ -62,7 +64,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <!--GroupBoxs-->
-        <GroupBox x:Name="gBoxChange" Grid.Column="0" Grid.ColumnSpan="10" Header="{Binding LEDsUpdate, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="10"/>
+        <GroupBox x:Name="gBoxChange" Grid.Column="0" Grid.ColumnSpan="10" Header="{Binding PortsManage, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="10"/>
         <GroupBox x:Name="gBoxWarmUp" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding WarmUp, Source={StaticResource LocStrings}}"  Grid.Row="12" Grid.RowSpan="3"/>
         <!--Text blocks-->
         <TextBlock Text="LED 1" Grid.Column="1" Grid.Row="2"/>
@@ -73,31 +75,31 @@
         <TextBlock Text="LED 6" Grid.Column="1" Grid.Row="7"/>
         <TextBlock Text="LED 7" Grid.Column="1" Grid.Row="8"/>
         <TextBlock Text="LED 8" Grid.Column="1" Grid.Row="9"/>
-        <TextBlock Text="Detector 1" Grid.Column="3" Grid.Row="2"/>
-        <TextBlock Text="Detector 2" Grid.Column="3" Grid.Row="3"/>
-        <TextBlock Text="Detector 3" Grid.Column="3" Grid.Row="4"/>
-        <TextBlock Text="Detector 4" Grid.Column="3" Grid.Row="5"/>
-        <TextBlock Text="Detector 5" Grid.Column="3" Grid.Row="6"/>
-        <TextBlock Text="Detector 6" Grid.Column="3" Grid.Row="7"/>
-        <TextBlock Text="Detector 7" Grid.Column="3" Grid.Row="8"/>
-        <TextBlock Text="Detector 8" Grid.Column="3" Grid.Row="9"/>
+        <TextBlock Text="{Binding WorkWithDetector, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="2"/>
+        <TextBlock Text="{Binding WorkWithDetector, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="3"/>
+        <TextBlock Text="{Binding WorkWithDetector, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="4"/>
+        <TextBlock Text="{Binding WorkWithDetector, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="5"/>
+        <TextBlock Text="{Binding WorkWithDetector, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="6"/>
+        <TextBlock Text="{Binding WorkWithDetector, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="7"/>
+        <TextBlock Text="{Binding WorkWithDetector, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="8"/>
+        <TextBlock Text="{Binding WorkWithDetector, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="9"/>
         <!--ToggleSwitch-->
-        <mah:ToggleSwitch Name="switchLEDA" IsChecked="{Binding ConfParams[0], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="2"/>
-        <mah:ToggleSwitch Name="switchLEDB" IsChecked="{Binding ConfParams[1], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="3"/>
-        <mah:ToggleSwitch Name="switchLEDC" IsChecked="{Binding ConfParams[2], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="4"/>
-        <mah:ToggleSwitch Name="switchLEDD" IsChecked="{Binding ConfParams[3], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="5"/>
-        <mah:ToggleSwitch Name="switchLEDE" IsChecked="{Binding ConfParams[4], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="6"/>
-        <mah:ToggleSwitch Name="switchLEDF" IsChecked="{Binding ConfParams[5], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="7"/>
-        <mah:ToggleSwitch Name="switchLEDG" IsChecked="{Binding ConfParams[6], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="8"/>
-        <mah:ToggleSwitch Name="switchLEDH" IsChecked="{Binding ConfParams[7], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="9"/>
-        <mah:ToggleSwitch Name="switchDetectorA" IsChecked="{Binding ConfParams[8], Mode=TwoWay}" Content="" Grid.Column="4" Grid.Row="2"/>
-        <mah:ToggleSwitch Name="switchDetectorB" IsChecked="{Binding ConfParams[9], Mode=TwoWay}" Content="" Grid.Column="4" Grid.Row="3"/>
-        <mah:ToggleSwitch Name="switchDetectorC" IsChecked="{Binding ConfParams[10], Mode=TwoWay}" Content="" Grid.Column="4" Grid.Row="4"/>
-        <mah:ToggleSwitch Name="switchDetectorD" IsChecked="{Binding ConfParams[11], Mode=TwoWay}" Content="" Grid.Column="4" Grid.Row="5"/>
-        <mah:ToggleSwitch Name="switchDetectorE" IsChecked="{Binding ConfParams[12], Mode=TwoWay}" Content="" Grid.Column="4" Grid.Row="6"/>
-        <mah:ToggleSwitch Name="switchDetectorF" IsChecked="{Binding ConfParams[13], Mode=TwoWay}" Content="" Grid.Column="4" Grid.Row="7"/>
-        <mah:ToggleSwitch Name="switchDetectorG" IsChecked="{Binding ConfParams[14], Mode=TwoWay}" Content="" Grid.Column="4" Grid.Row="8"/>
-        <mah:ToggleSwitch Name="switchDetectorH" IsChecked="{Binding ConfParams[15], Mode=TwoWay}" Content="" Grid.Column="4" Grid.Row="9"/>
+        <mah:ToggleSwitch Name="switchLEDA" IsChecked="{Binding SelectedLEDs[0], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="2"/>
+        <mah:ToggleSwitch Name="switchLEDB" IsChecked="{Binding SelectedLEDs[1], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="3"/>
+        <mah:ToggleSwitch Name="switchLEDC" IsChecked="{Binding SelectedLEDs[2], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="4"/>
+        <mah:ToggleSwitch Name="switchLEDD" IsChecked="{Binding SelectedLEDs[3], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="5"/>
+        <mah:ToggleSwitch Name="switchLEDE" IsChecked="{Binding SelectedLEDs[4], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="6"/>
+        <mah:ToggleSwitch Name="switchLEDF" IsChecked="{Binding SelectedLEDs[5], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="7"/>
+        <mah:ToggleSwitch Name="switchLEDG" IsChecked="{Binding SelectedLEDs[6], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="8"/>
+        <mah:ToggleSwitch Name="switchLEDH" IsChecked="{Binding SelectedLEDs[7], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="9"/>
+        <ComboBox Name="cBoxLEDA" IsEnabled="{Binding ElementName=switchLEDA, Path=IsChecked}" SelectedItem="{Binding ConfParams[0]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="2"/>
+        <ComboBox Name="cBoxLEDB" IsEnabled="{Binding ElementName=switchLEDB, Path=IsChecked}" SelectedItem="{Binding ConfParams[1]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="3"/>
+        <ComboBox Name="cBoxLEDC" IsEnabled="{Binding ElementName=switchLEDC, Path=IsChecked}" SelectedItem="{Binding ConfParams[2]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="4"/>
+        <ComboBox Name="cBoxLEDD" IsEnabled="{Binding ElementName=switchLEDD, Path=IsChecked}" SelectedItem="{Binding ConfParams[3]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="5"/>
+        <ComboBox Name="cBoxLEDE" IsEnabled="{Binding ElementName=switchLEDE, Path=IsChecked}" SelectedItem="{Binding ConfParams[4]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="6"/>
+        <ComboBox Name="cBoxLEDF" IsEnabled="{Binding ElementName=switchLEDF, Path=IsChecked}" SelectedItem="{Binding ConfParams[5]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="7"/>
+        <ComboBox Name="cBoxLEDG" IsEnabled="{Binding ElementName=switchLEDG, Path=IsChecked}" SelectedItem="{Binding ConfParams[6]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="8"/>
+        <ComboBox Name="cBoxLEDH" IsEnabled="{Binding ElementName=switchLEDH, Path=IsChecked}" SelectedItem="{Binding ConfParams[7]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="9"/>
         <!--<ComboBox x:Name="cBoxSelectElement" ItemsSource="{Binding ElementsList}" Grid.Column="3" Grid.Row="16" IsEnabled="{Binding ElementName=rbtnEdit, Path=IsChecked}" Margin="5"/>-->
         <ListBox Name="lBoxConfigure" ItemsSource="{Binding ConfNamesList}" SelectedItem="{Binding SelectedConf}" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="3"/>
         <Button Name="btnEdit" IsEnabled="{Binding EnableEditConf}" Content="{Binding EditConfiguration, Source={StaticResource LocStrings}}" Command="{Binding EditConfCommand}" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="5"/>
@@ -106,7 +108,7 @@
         <TextBlock Name="tBlockNameValid" Text="{Binding ErrorMessageNewConfName}" Visibility="{Binding VisibilityErrorMessageNewConfName, Converter={StaticResource booleanToVisibilityConverter}}" HorizontalAlignment="Left" Foreground="Red" Grid.Column="8" Grid.Row="8"/>
         <Button Name="btnSave" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="9" Content="{Binding AddConfiguration, Source={StaticResource LocStrings}}" IsEnabled="{Binding EnableAddConf}" Command="{Binding AddNewConfiguration}"/>
         <TextBlock Text="{Binding WarmUpTime, Source={StaticResource LocStrings}}" Grid.Column="1" Grid.Row="13"/>
-        <TextBox Name="tBoxWarmUp" Grid.Column="2" Grid.Row="13" />
-        <Button Name="btnSaveWarmUp" Content="{Binding Save, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="13"/>
+        <TextBox Name="tBoxWarmUp" Text="{Binding WarmUpSec}" Grid.Column="2" Grid.Row="13" />
+        <Button Name="btnSaveWarmUp" Command="{Binding SaveWarmUpCommand}" Content="{Binding Save, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="13"/>
     </Grid>
 </UserControl>

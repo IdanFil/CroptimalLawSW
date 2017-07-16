@@ -12,6 +12,7 @@ namespace CroptimalLabSW.Model.Chromameter
     class ChromaCalibrationModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private DBOptions m_DBOptions;
 
         private int _avgNum;
         private double _bgReading;
@@ -21,16 +22,17 @@ namespace CroptimalLabSW.Model.Chromameter
         private double _regression;
         private string _elementName;
         private string _selectedElement;
-        private string _configuration;
+        private string _SelectedConfiguration;
         private ObservableCollection<string> _elementsList;
-
-        private DBOptions m_DBOptions;
+        private ObservableCollection<string> _configurationsList;
 
         #region Constructor
         public ChromaCalibrationModel()
         {
-            m_DBOptions = new DBOptions();
+            m_DBOptions = DBOptions.Instance();
+            m_DBOptions.NewChromaConfigureAdded += updateConfigurationsList;
             _elementsList = new ObservableCollection<string>(m_DBOptions.getChromameterElementsName());
+            ConfigurationsList = m_DBOptions.getChromameterConfigurationNames();
         }
         #endregion
 
@@ -40,7 +42,21 @@ namespace CroptimalLabSW.Model.Chromameter
         public ObservableCollection<string> ElementsList
         {
             get { return _elementsList; }
-            set { _elementsList = value; }
+            set
+            {
+                _elementsList = value;
+                RaisePropertyChanged("ElementsList");
+            }
+        }
+
+        public ObservableCollection<string> ConfigurationsList
+        {
+            get { return _configurationsList; }
+            set
+            {
+                _configurationsList = value;
+                RaisePropertyChanged("ConfigurationsList");
+            }
         }
 
         public string SelectedElement
@@ -130,18 +146,23 @@ namespace CroptimalLabSW.Model.Chromameter
             }
         }
 
-        public string Configuration
+        public string SelectedConfiguration
         {
-            get { return _configuration; }
+            get { return _SelectedConfiguration; }
             set
             {
-                _configuration = value;
-                RaisePropertyChanged("Configuration");
+                _SelectedConfiguration = value;
+                RaisePropertyChanged("SelectedConfiguration");
             }
         }
 
+        public void updateConfigurationsList(object sender, EventArgs e)
+        {
+            ConfigurationsList = m_DBOptions.getChromameterConfigurationNames();
+        }
+
         #endregion
-     
+
         private void RaisePropertyChanged(string i_propertyName)
         {
             if (PropertyChanged != null)

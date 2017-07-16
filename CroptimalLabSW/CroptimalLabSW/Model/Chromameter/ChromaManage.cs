@@ -1,189 +1,144 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using IoControllerComm.Adapter.Communication;
-//using IoControllerComm.Adapter.DataTypes;
-//using IoControllerComm.Adapter.Responses;
-//using IoControllerComm.Service;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using IoControllerComm.Adapter.Communication;
+using IoControllerComm.Adapter.DataTypes;
+using IoControllerComm.Adapter.Responses;
+using IoControllerComm.Service;
+using CroptimalLabSW.Model.DB;
 
-//namespace CroptimalLabSW.Model.Chromameter
-//{
-//    class ChromaManage
-//    {
-//        internal IIoService m_ioService = new IoService();
+namespace CroptimalLabSW.Model.Chromameter
+{
+    class ChromaManage
+    {
+        private static ChromaManage s_chromaManage = null;
+        private static object s_LockChromaManage = new object();
+        internal IIoService m_ioService = new IoService();
+        private DBOptions m_DBOptions;
 
+        private bool _connectionOn;
+        private int _commPort;
+        private int _keepAliveSec;
+        private bool[] m_maskPorts;
+        private bool[] m_statePorts;
+        private int m_quantityOfLEDs;
 
-//        private void SetIoPort(int index)
-//        {
-//            StartRunningAction();
-//            SetIoPortDto data = new SetIoPortDto()
-//            {
-//                Port = (byte)index,
-//                State = (m_setPorts[index] == true) ? OnOffEnum.On : OnOffEnum.Off
-//            };
-//            m_ioService.SetIoPort(data, (p) =>
-//            {
-//                var resp = p.ResponseError;
-//                EndRunningAction(p.ResponseError);
-//            });
-//        }
+        public int KeepAliveSec
+        {
+            get { return _keepAliveSec; }
+            set { _keepAliveSec = value; }
+        }
+        public int CommPort
+        {
+            get { return _commPort; }
+            set { _commPort = value; }
+        }
+        public bool ConnectionOn
+        {
+            get { return _connectionOn; }
+            set { _connectionOn = value; }
+        }
 
-//        private void InitController(int i_keepAliveSec, int i_port)
-//        {
-//            StartRunningAction();
-//            InitDataDto data = new InitDataDto()
-//            {
-//                KeepAlive = (UInt32)i_keepAliveSec,
-//                Port = i_port,
-//            };
-//            data.Port = i_port;
-//            m_ioService.InitController(data, (p) =>
-//            {
-//                var resp = p.ResponseError;
-//                if (resp == CommErrors.NoError)
-//                {
-//                    InitPorts();
-//                }
-//                EndRunningAction(p.ResponseError);
-//            });
-//        }
+        public ChromaManage()
+        {
+            m_DBOptions = DBOptions.Instance();
+            m_quantityOfLEDs = m_DBOptions.getChromameterQuantityOfLEDs();
+            m_maskPorts = new bool[m_quantityOfLEDs];
+            m_maskPorts = Enumerable.Repeat(false, m_maskPorts.Length).ToArray();
+            m_statePorts = new bool[m_quantityOfLEDs];
+            initPortsState();
+        }
 
-//        private void SetMaskIoPorts(object parameter)
-//        {
-//            StartRunningAction();
-//            m_ioService.SetMaskIoPorts(new SetMaskPortDto(m_maskPorts, m_statePorts), (p) =>
-//            {
-//                EndRunningAction(p.ResponseError);
-//            });
-//        }
+        private void initPortsState()
+        {
+            m_statePorts = Enumerable.Repeat(false, m_statePorts.Length).ToArray();
+        }
 
-//        private void GetSwVersion(object parameter)
-//        {
-//            StartRunningAction();
-//            Version = "";
-//            m_ioService.GetSwVersion((p) =>
-//            {
-//                GetSwVersionResponse swVer = p as GetSwVersionResponse;
-//                if ((swVer != null) && (swVer.ResponseError == CommErrors.NoError))
-//                {
-//                    Version = swVer.SwVersionDataDto.ToString();
-//                }
-//                EndRunningAction(p.ResponseError);
-//            });
+        public static ChromaManage Instance()
+        {
+            lock (s_LockChromaManage)
+            {
+                if (s_chromaManage == null)
+                {
+                    s_chromaManage = new ChromaManage();
+                }
+            }
+            return s_chromaManage;
+        }
 
-//        }
+        public bool openConnection()
+        {
+            InitDataDto data = new InitDataDto()
+            {
+                KeepAlive = (UInt32)KeepAliveSec,
+                Port = CommPort,
+            };
+            GeneralResponse resp = m_ioService.IoAdapter.Init(data);
+            if(resp.ResponseError == CommErrors.NoError)
+            {
+                ConnectionOn = true;
+                return true;
+            }
+            return false;
+        }
 
-//        private void GetAnalogInput(object parameter)
-//        {
-//            StartRunningAction();
-//            AnalogInputValue = null;
-//            m_ioService.GetAnalogInput(SelectedChannel, (p) =>
-//            {
-//                GetAnalogInputResponse anIn = p as GetAnalogInputResponse;
-//                if ((anIn != null) && (anIn.ResponseError == CommErrors.NoError))
-//                {
-//                    AnalogInputValue = anIn.GetAnalogInputDto.Value;
-//                }
-//                EndRunningAction(p.ResponseError);
-//            });
-//        }
+        public bool closeConnection()
+        {
+            GeneralResponse resp = m_ioService.IoAdapter.Close();
+            if (resp.ResponseError == CommErrors.NoError)
+            {
+                ConnectionOn = false;
+                return true;
+            }
+            return false;
+        }
 
-//        private void GetAllAnalogInput(object parameter)
-//        {
-//            ClearAnalogInputs();
-//            StartRunningAction();
-//            m_ioService.GetAllAnalogInput((p) =>
-//            {
-//                GetAllAnalogInputsResponse anIn = p as GetAllAnalogInputsResponse;
-//                if ((anIn != null) && (anIn.ResponseError == CommErrors.NoError))
-//                {
-//                    AnalogInputValues = anIn.GetAllAnalogInputsDto.Values;
-//                }
-//                EndRunningAction(p.ResponseError);
-//            });
-//        }
+        public bool setMaskLEDs(bool[] i_portsState)
+        {
+            GeneralResponse resp = m_ioService.IoAdapter.SetMaskIoPorts(new SetMaskPortDto(m_maskPorts, i_portsState));
+            if (resp.ResponseError == CommErrors.NoError)
+            {
+                Array.Copy(i_portsState, m_statePorts, i_portsState.Length);
+                return true;
+            }
+            return false;
+        }
+        
+        public bool setLED(int i_LEDNum, OnOffEnum i_onOff)
+        {
+            SetIoPortDto data = new SetIoPortDto();
+            data.Port = (byte)i_LEDNum;
+            data.State = i_onOff;
+            GeneralResponse resp = m_ioService.IoAdapter.SetIoPort(data);
+            if (resp.ResponseError == CommErrors.NoError)
+            {
+                return true;
+            }
+            return false;
+        }
 
-//        private void StartRunningAction()
-//        {
-//            EnableActions = false;
-//            ClearError();
-//        }
+        public bool GetAnalogInput(int i_channel, ref float io_result)
+        {
+            var resp = m_ioService.IoAdapter.GetAnalogInput(i_channel);
+            if (resp.ResponseError == CommErrors.NoError)
+            {
+                io_result = resp.GetAnalogInputDto.Value;
+                return true;
+            }
+            return false;
+        }
 
-//        private void EndRunningAction(CommErrors err)
-//        {
-//            EnableActions = true;
-//            Error = err.ToString();
-//        }
-
-//        private void InitPorts()
-//        {
-//            m_internalChange = true;
-//            Port0 = false;
-//            Port1 = false;
-//            Port2 = false;
-//            Port3 = false;
-//            Port4 = false;
-//            Port5 = false;
-//            Port6 = false;
-//            Port7 = false;
-//            m_internalChange = false;
-
-//            for (int i = 0; i < MaskPorts.Length; i++)
-//            {
-//                MaskPorts[i] = false;
-//            }
-//            for (int i = 0; i < StatePorts.Length; i++)
-//            {
-//                StatePorts[i] = false;
-//            }
-//            RaisePropertyChanged(() => MaskPorts);
-//            RaisePropertyChanged(() => StatePorts);
-//        }
-
-//        private void ClearError()
-//        {
-//            Error = "";
-//        }
-
-//        private void ClearAnalogInputs()
-//        {
-//            AnalogInputValues = null;
-//        }
-
-//        private void OnAnalogInputTimer(object sender, ElapsedEventArgs e)
-//        {
-//            var resp = m_ioService.IoAdapter.GetAnalogInput(SelectedChannel);
-//            if (resp.ResponseError == CommErrors.NoError)
-//            {
-//                AnalogInputValue = resp.GetAnalogInputDto.Value;
-//            }
-//            else
-//            {
-//                if (AiPollingStopError == true)
-//                {
-//                    AnalogInputPolling = false;
-//                }
-//            }
-//            Error = resp.ResponseError.ToString();
-//        }
-
-//        private void OnAllAnalogInputTimer(object sender, ElapsedEventArgs e)
-//        {
-//            var resp = m_ioService.IoAdapter.GetAllAnalogInputs();
-//            if (resp.ResponseError == CommErrors.NoError)
-//            {
-//                AnalogInputValues = resp.GetAllAnalogInputsDto.Values;
-//            }
-//            else
-//            {
-//                if (AllAiPollingStopError == true)
-//                {
-//                    AllAnalogInputPolling = false;
-//                }
-//            }
-//            Error = resp.ResponseError.ToString();
-//        }
-//    }
-//}
+        public bool GetAllAnalogInput(ref float[] io_resultsArr)
+        {
+            var resp = m_ioService.IoAdapter.GetAllAnalogInputs();
+            if (resp.ResponseError == CommErrors.NoError)
+            {
+                io_resultsArr = resp.GetAllAnalogInputsDto.Values;
+                return true;
+            }
+            return false;
+        }
+    }
+}

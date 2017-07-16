@@ -190,14 +190,11 @@
   <data name="Xray" xml:space="preserve">
     <value>Xray</value>
   </data>
-  <data name="f" xml:space="preserve">
-    <value>f</value>
-  </data>
   <data name="LEDsUpdate" xml:space="preserve">
     <value>LEDs Update</value>
   </data>
-  <data name="UpdateLEDs" xml:space="preserve">
-    <value>Update LEDs</value>
+  <data name="PortsManage" xml:space="preserve">
+    <value>Ports Manage</value>
   </data>
   <data name="AddConfiguration" xml:space="preserve">
     <value>Add Configuration</value>
@@ -222,5 +219,17 @@
   </data>
   <data name="ShortName" xml:space="preserve">
     <value>Short name</value>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="Set" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>df</value>
+  </data>
+  <data name="WorkWithDetector" xml:space="preserve">
+    <value>Work with Detector:</value>
   </data>
 </root>

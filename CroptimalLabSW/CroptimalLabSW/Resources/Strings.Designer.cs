@@ -115,6 +115,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Configuration.
+        /// </summary>
+        public static string Configuration {
+            get {
+                return ResourceManager.GetString("Configuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         public static string Edit {
@@ -165,15 +174,6 @@ namespace CroptimalLabSW.Resources {
         public static string Exit {
             get {
                 return ResourceManager.GetString("Exit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to f.
-        /// </summary>
-        public static string f {
-            get {
-                return ResourceManager.GetString("f", resourceCulture);
             }
         }
         
@@ -250,6 +250,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ports Manage.
+        /// </summary>
+        public static string PortsManage {
+            get {
+                return ResourceManager.GetString("PortsManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to R².
         /// </summary>
         public static string R2 {
@@ -322,6 +331,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set.
+        /// </summary>
+        public static string Set {
+            get {
+                return ResourceManager.GetString("Set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings {
@@ -340,11 +358,11 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update LEDs.
+        ///   Looks up a localized string similar to df.
         /// </summary>
-        public static string UpdateLEDs {
+        public static string String1 {
             get {
-                return ResourceManager.GetString("UpdateLEDs", resourceCulture);
+                return ResourceManager.GetString("String1", resourceCulture);
             }
         }
         
@@ -363,6 +381,15 @@ namespace CroptimalLabSW.Resources {
         public static string WarmUpTime {
             get {
                 return ResourceManager.GetString("WarmUpTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work with Detector:.
+        /// </summary>
+        public static string WorkWithDetector {
+            get {
+                return ResourceManager.GetString("WorkWithDetector", resourceCulture);
             }
         }
         

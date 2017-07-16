@@ -97,6 +97,7 @@
     <Compile Include="Model\Chromameter\ChromaCalibrationModel.cs" />
     <Compile Include="Model\Chromameter\ChromaManage.cs" />
     <Compile Include="Model\Chromameter\ChromaConfigurationModel.cs" />
+    <Compile Include="Model\Chromameter\Measurment.cs" />
     <Compile Include="Model\DB\DBConnection.cs" />
     <Compile Include="Model\DB\DBOptions.cs" />
     <Compile Include="Model\Generel\Log.cs" />
@@ -222,6 +223,9 @@
   <ItemGroup>
     <Resource Include="Images\Croptimal.png" />
     <Resource Include="Images\seedling-s.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\EventArgsClasses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

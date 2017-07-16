@@ -19,13 +19,13 @@ namespace CroptimalLabSW.ViewModel
     {
 
         private PlotModel _plotModel;
-        private ChromaCalibrationModel _chromaCalibrationModel;
+        private ChromaCalibrationModel m_chromaCalibrationModel;
 
         #region Constructor
         public ChromaCalibrationViewModel()
         {
-            _chromaCalibrationModel = new ChromaCalibrationModel();
-            _chromaCalibrationModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+            m_chromaCalibrationModel = new ChromaCalibrationModel();
+            m_chromaCalibrationModel.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
             {
                 RaisePropertyChanged(e.PropertyName);
             };
@@ -39,8 +39,8 @@ namespace CroptimalLabSW.ViewModel
 
         public ObservableCollection<string> ElementsList
         {
-            get { return _chromaCalibrationModel.ElementsList; }
-            set { _chromaCalibrationModel.ElementsList = value; }
+            get { return m_chromaCalibrationModel.ElementsList; }
+            set { m_chromaCalibrationModel.ElementsList = value; }
         }
 
         public PlotModel PlotModel
@@ -59,10 +59,10 @@ namespace CroptimalLabSW.ViewModel
         }
         public string SelectedElement
         {
-            get { return _chromaCalibrationModel.SelectedElement; }
+            get { return m_chromaCalibrationModel.SelectedElement; }
             set
             {
-                _chromaCalibrationModel.SelectedElement = value;
+                m_chromaCalibrationModel.SelectedElement = value;
                 RaisePropertyChanged("SelectedElement");
             }
         }
@@ -70,10 +70,10 @@ namespace CroptimalLabSW.ViewModel
 
         public string ElementName
         {
-            get { return _chromaCalibrationModel.ElementName; }
+            get { return m_chromaCalibrationModel.ElementName; }
             set
             {
-                _chromaCalibrationModel.ElementName = value;
+                m_chromaCalibrationModel.ElementName = value;
                 RaisePropertyChanged("ElementName");
             }
         }
@@ -81,10 +81,10 @@ namespace CroptimalLabSW.ViewModel
 
         public double Regression
         {
-            get { return _chromaCalibrationModel.Regression; }
+            get { return m_chromaCalibrationModel.Regression; }
             set
             {
-                _chromaCalibrationModel.Regression = value;
+                m_chromaCalibrationModel.Regression = value;
                 RaisePropertyChanged("Regression");
             }
         }
@@ -92,10 +92,10 @@ namespace CroptimalLabSW.ViewModel
 
         public int Polynomial
         {
-            get { return _chromaCalibrationModel.Polynomial; }
+            get { return m_chromaCalibrationModel.Polynomial; }
             set
             {
-                _chromaCalibrationModel.Polynomial = value;
+                m_chromaCalibrationModel.Polynomial = value;
                 RaisePropertyChanged("Polynomial");
             }
         }
@@ -103,10 +103,10 @@ namespace CroptimalLabSW.ViewModel
 
         public double Concentration
         {
-            get { return _chromaCalibrationModel.Concentration; }
+            get { return m_chromaCalibrationModel.Concentration; }
             set
             {
-                _chromaCalibrationModel.Concentration = value;
+                m_chromaCalibrationModel.Concentration = value;
                 RaisePropertyChanged("Concentration");
             }
         }
@@ -114,10 +114,10 @@ namespace CroptimalLabSW.ViewModel
 
         public int Repetitions
         {
-            get { return _chromaCalibrationModel.Repetitions; }
+            get { return m_chromaCalibrationModel.Repetitions; }
             set
             {
-                _chromaCalibrationModel.Repetitions = value;
+                m_chromaCalibrationModel.Repetitions = value;
                 RaisePropertyChanged("Repetitions");
             }
         }
@@ -125,10 +125,10 @@ namespace CroptimalLabSW.ViewModel
 
         public double BGReading
         {
-            get { return _chromaCalibrationModel.BGReading; }
+            get { return m_chromaCalibrationModel.BGReading; }
             set
             {
-                _chromaCalibrationModel.BGReading = value;
+                m_chromaCalibrationModel.BGReading = value;
                 RaisePropertyChanged("BGReading");
             }
         }
@@ -136,21 +136,31 @@ namespace CroptimalLabSW.ViewModel
 
         public int AVGNum
         {
-            get { return _chromaCalibrationModel.AVGNum; }
+            get { return m_chromaCalibrationModel.AVGNum; }
             set
             {
-                _chromaCalibrationModel.AVGNum = value;
+                m_chromaCalibrationModel.AVGNum = value;
                 RaisePropertyChanged("AVGNum");
             }
         }
 
-        public string Configuration
+        public string SelectedConfiguration
         {
-            get { return _chromaCalibrationModel.Configuration; }
+            get { return m_chromaCalibrationModel.SelectedConfiguration; }
             set
             {
-                _chromaCalibrationModel.Configuration = value;
-                RaisePropertyChanged("Configuration");
+                m_chromaCalibrationModel.SelectedConfiguration = value;
+                RaisePropertyChanged("SelectedConfiguration");
+            }
+        }
+
+        public ObservableCollection<string> ConfigurationsList
+        {
+            get { return m_chromaCalibrationModel.ConfigurationsList; }
+            set
+            {
+                m_chromaCalibrationModel.ConfigurationsList = value;
+                RaisePropertyChanged("ConfigurationsList");
             }
         }
 
@@ -167,25 +177,3 @@ namespace CroptimalLabSW.ViewModel
 
     }
 }
-
-        //public RelayCommand<string> ChangeDisplayCommand
-        //{
-        //    get
-        //    {
-        //        return new RelayCommand<string>(viewName => {
-        //            Messenger.Default.Send<SwitchDisplayMessage>(new SwitchDisplayMessage { ViewName = viewName });
-        //            Messenger.Default.Send<VisibilityBottomMenuMessage>(new VisibilityBottomMenuMessage { Visibility = true });
-        //            Messenger.Default.Send<IsCheckedBottomMenuMessage>(new IsCheckedBottomMenuMessage { IsChecked = true });
-        //        });
-        //    }
-        //}
-
-        //public RelayCommand ExitCommand
-        //{
-        //    get
-        //    {
-        //        return new RelayCommand(() => {
-        //            Environment.Exit(0);
-        //        });
-        //    }
-        //}

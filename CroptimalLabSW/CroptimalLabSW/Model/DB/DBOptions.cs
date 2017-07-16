@@ -9,11 +9,27 @@ namespace CroptimalLabSW.Model.DB
 {
     class DBOptions
     {
+        private static DBOptions s_DBOptions = null;
+        private static object s_LockDBOptions = new object();
+
+        public event EventHandler<EventArgs> NewChromaConfigureAdded;
         private DBConnection conn;
 
-        public DBOptions()
+        private DBOptions()
         {
             conn = DBConnection.Instance;
+        }
+
+        public static DBOptions Instance()
+        {
+            lock (s_LockDBOptions)
+            {
+                if (s_DBOptions == null)
+                {
+                    s_DBOptions = new DBOptions();
+                }
+            }
+            return s_DBOptions;
         }
 
         #region Chromameter
@@ -43,21 +59,21 @@ namespace CroptimalLabSW.Model.DB
             return configureList;
         }
 
-        public ObservableCollection<bool> getConfiguretion(string i_configureName)
+        public ObservableCollection<int> getConfiguretion(string i_configureName)
         {
-            string query = "SELECT LedA,LedB,LedC,LedD,LedE,LedF,LedG,LedH,DetectorA,DetectorB,DetectorC,DetectorD,DetectorE,DetectorF,DetectorG,DetectorH FROM CroptimalDB.dbo.ChromameterConfigurations WHERE ConfigurationName='" + i_configureName + "'";
+            string query = "SELECT LedA,LedB,LedC,LedD,LedE,LedF,LedG,LedH FROM CroptimalDB.dbo.ChromameterConfigurations WHERE ConfigurationName='" + i_configureName + "'";
             DataTable DT = (DataTable)conn.ExecuteReadCommand(query);
-            ObservableCollection<bool> configure = new ObservableCollection<bool>();
+            ObservableCollection<int> configure = new ObservableCollection<int>();
             for (int i = 0; i < DT.Columns.Count; i++)
             {
-                configure.Add(Convert.ToBoolean(DT.Rows[0][i]));
+                configure.Add(Convert.ToInt16(DT.Rows[0][i]));
             }
             return configure;
         }
 
-        public bool insertNewChromaConfiguration(string i_confName, ObservableCollection<bool> i_confParams)
+        public bool insertNewChromaConfiguration(string i_confName, ObservableCollection<int> i_confParams)
         {
-            string query = "INSERT INTO CroptimalDB.dbo.ChromameterConfigurations (ConfigurationName,LedA,LedB,LedC,LedD,LedE,LedF,LedG,LedH,DetectorA,DetectorB,DetectorC,DetectorD,DetectorE,DetectorF,DetectorG,DetectorH)" +
+            string query = "INSERT INTO CroptimalDB.dbo.ChromameterConfigurations (ConfigurationName,LedA,LedB,LedC,LedD,LedE,LedF,LedG,LedH)" +
                 " VALUES ('" + i_confName +
                 "', '" + i_confParams[0] +
                 "', '" + i_confParams[1] +
@@ -66,30 +82,55 @@ namespace CroptimalLabSW.Model.DB
                 "', '" + i_confParams[4] +
                 "', '" + i_confParams[5] +
                 "', '" + i_confParams[6] +
-                "', '" + i_confParams[7] +
-                "', '" + i_confParams[8] +
-                "', '" + i_confParams[9] +
-                "', '" + i_confParams[10] +
-                "', '" + i_confParams[11] +
-                "', '" + i_confParams[12] +
-                "', '" + i_confParams[13] +
-                "', '" + i_confParams[14] +
-                "', '" + i_confParams[15] + "')";
+                "', '" + i_confParams[7] + "')";
             
-            return conn.ExecuteWriteCommand(query);
+            if(conn.ExecuteWriteCommand(query))
+            {
+                OnNewChromaConfigureAdded(new EventArgs());
+                return true;
+            }
+            return false;
         }
 
 
-        public bool updateChromaConfiguration(string i_selectedConfName, ObservableCollection<bool> i_confParams)
+        public bool updateChromaConfiguration(string i_selectedConfName, ObservableCollection<int> i_confParams)
         {
             string query = "UPDATE CroptimalDB.dbo.ChromameterConfigurations SET LedA='" + i_confParams[0] + "', LedB='" + i_confParams[1] + "', LedC='" + i_confParams[2]
-                + "', LedD='" + i_confParams[3] + "', LedE='" + i_confParams[4] + "', LedF = '" + i_confParams[5] + "', LedG = '" + i_confParams[6] + "', LedH = '" + i_confParams[7]
-                + "', DetectorA = '" + i_confParams[8] + "', DetectorB = '" + i_confParams[9] + "', DetectorC = '" + i_confParams[10] + "', DetectorD = '" + i_confParams[11]
-                 + "', DetectorE = '" + i_confParams[12] + "', DetectorF = '" + i_confParams[13] + "', DetectorG = '" + i_confParams[14] + "', DetectorH = '" + i_confParams[15] 
+                + "', LedD='" + i_confParams[3] + "', LedE='" + i_confParams[4] + "', LedF = '" + i_confParams[5] + "', LedG = '" + i_confParams[6] + "', LedH = '" + i_confParams[7] 
                  + "' WHERE ConfigurationName='" + i_selectedConfName + "'";
 
             return conn.ExecuteWriteCommand(query);
         }
+
+        public bool updateChromaWarmUpSec(int i_warmUpSec)
+        {
+            string query = "UPDATE CroptimalDB.dbo.ChromameterSettings SET WarmUpSec ='" + i_warmUpSec + "'";
+            return conn.ExecuteWriteCommand(query);
+        }
+
+        public int getChromameterWarmUpSec()
+        {
+            string query = "SELECT WarmUpSec FROM CroptimalDB.dbo.ChromameterSettings";
+            DataTable DT = (DataTable)conn.ExecuteReadCommand(query);
+            return (int)DT.Rows[0][0];
+        }
+
+        public int getChromameterQuantityOfLEDs()
+        {
+            string query = "SELECT QuantityOfLEDs FROM CroptimalDB.dbo.ChromameterSettings";
+            DataTable DT = (DataTable)conn.ExecuteReadCommand(query);
+            return (int)DT.Rows[0][0];
+        }
+
+        private void OnNewChromaConfigureAdded(EventArgs e)
+        {
+            EventHandler<EventArgs> handler = NewChromaConfigureAdded;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
         #endregion
     }
 }

@@ -16,15 +16,28 @@ namespace CroptimalLabSW.Model.Chromameter
         private ObservableCollection<string> _confNamesList;
         private string _selectedConf;
         private string _newConfName;
-        private ObservableCollection<bool> _confParams;
+        private int _warmUpSec;
+        private ObservableCollection<int> _confParams;
 
         private DBOptions m_DBOptions;
 
         public ChromaConfigurationModel()
         {
-            m_DBOptions = new DBOptions();
-            getConfigurationsNames();
-            ConfParams = new ObservableCollection<bool> { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
+            m_DBOptions = DBOptions.Instance();
+            m_DBOptions.NewChromaConfigureAdded += updateConfigurationsList;
+            ConfParams = new ObservableCollection<int> { 0,0,0,0,0,0,0,0};
+            WarmUpSec = m_DBOptions.getChromameterWarmUpSec();
+            ConfNamesList = m_DBOptions.getChromameterConfigurationNames();
+        }
+
+        public int WarmUpSec
+        {
+            get { return _warmUpSec; }
+            set
+            {
+                _warmUpSec = value;
+                RaisePropertyChanged("WarmUpSec");
+            }
         }
 
         public ObservableCollection<string> ConfNamesList
@@ -37,7 +50,7 @@ namespace CroptimalLabSW.Model.Chromameter
             }
         }
 
-        public ObservableCollection<bool> ConfParams
+        public ObservableCollection<int> ConfParams
         {
             get { return _confParams; }
             set
@@ -67,6 +80,11 @@ namespace CroptimalLabSW.Model.Chromameter
             }
         }
 
+        public void updateConfigurationsList(object sender, EventArgs e)
+        {
+            ConfNamesList = m_DBOptions.getChromameterConfigurationNames();
+        }
+
         public bool getConfiguration()
         {
             ConfParams = m_DBOptions.getConfiguretion(SelectedConf);
@@ -75,23 +93,17 @@ namespace CroptimalLabSW.Model.Chromameter
 
         public bool addNewConfiguration()
         {
-            if(m_DBOptions.insertNewChromaConfiguration(NewConfName, ConfParams))
-            {
-                getConfigurationsNames();
-                return true;
-            }
-            return false;
+            return m_DBOptions.insertNewChromaConfiguration(NewConfName, ConfParams);
+        }
+
+        public void saveWarmUp()
+        {
+            m_DBOptions.updateChromaWarmUpSec(WarmUpSec);
         }
 
         public bool editNewConfiguration()
         {
             return m_DBOptions.updateChromaConfiguration(SelectedConf, ConfParams);
-        }
-
-        public bool getConfigurationsNames()
-        {
-            ConfNamesList = m_DBOptions.getChromameterConfigurationNames();
-            return ConfNamesList != null ? true : false;
         }
 
 

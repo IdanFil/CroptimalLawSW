@@ -12,22 +12,29 @@ using GalaSoft.MvvmLight.Messaging;
 using System.Resources;
 using System.Reflection;
 using CroptimalLabSW.Resources;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace CroptimalLabSW.ViewModel
 {
     public class ChromaConfigurationViewModel : ViewModelBase
     {
         private ChromaConfigurationModel _chromaConfigurationModel;
+        private IDialogCoordinator dialogCoordinator;
 
         private string _errorMessageNewConfName;
         private string _fontColorNewConfName;
         private bool _visibilityErrorMessageNewConfName; 
         private bool _enableAddConf;
         private bool _enableEditConf;
+        private ObservableCollection<string> _detectorsList;
+        private ObservableCollection<bool> _selectedLEDs;
         ResourceManager rm;
 
         public ChromaConfigurationViewModel()
         {
+            dialogCoordinator = DialogCoordinator.Instance;
+            DetectorsList = new ObservableCollection<string>() {"1","2","3","4","5","6","7","8"};
+            SelectedLEDs = new ObservableCollection<bool>() {false, false, false, false, false, false, false, false};
             rm = new ResourceManager("CroptimalLabSW.Resources.Strings", Assembly.GetExecutingAssembly());
             _chromaConfigurationModel = new ChromaConfigurationModel();
             _chromaConfigurationModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
@@ -54,6 +61,36 @@ namespace CroptimalLabSW.ViewModel
             {
                 _fontColorNewConfName = value;
                 RaisePropertyChanged("FontColorNewConfName");
+            }
+        }
+
+        public int WarmUpSec
+        {
+            get { return _chromaConfigurationModel.WarmUpSec; }
+            set
+            {
+                _chromaConfigurationModel.WarmUpSec = value;
+                RaisePropertyChanged("WarmUpSec");
+            }
+        }
+
+        public ObservableCollection<string> DetectorsList
+        {
+            get { return _detectorsList; }
+            set
+            {
+                _detectorsList = value;
+                RaisePropertyChanged("DetectorsList");
+            }
+        }
+
+        public ObservableCollection<bool> SelectedLEDs
+        {
+            get { return _selectedLEDs; }
+            set
+            {
+                _selectedLEDs = value;
+                RaisePropertyChanged("SelectedLEDs");
             }
         }
 
@@ -114,7 +151,7 @@ namespace CroptimalLabSW.ViewModel
             set { _chromaConfigurationModel.ConfNamesList = value; }
         }
 
-        public ObservableCollection<bool> ConfParams
+        public ObservableCollection<int> ConfParams
         {
             get { return _chromaConfigurationModel.ConfParams; }
             set { _chromaConfigurationModel.ConfParams = value; }
@@ -126,9 +163,12 @@ namespace CroptimalLabSW.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    _chromaConfigurationModel.addNewConfiguration();
-                    EnableAddConf = false;
-                    NewConfName = "";
+                    if (checkSelectedConf())
+                    {
+                        _chromaConfigurationModel.addNewConfiguration();
+                        EnableAddConf = false;
+                        NewConfName = "";
+                    }
                 });
             }
         }
@@ -139,7 +179,21 @@ namespace CroptimalLabSW.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    _chromaConfigurationModel.editNewConfiguration();
+                    if (checkSelectedConf())
+                    {
+                        _chromaConfigurationModel.editNewConfiguration();
+                    }
+                });
+            }
+        }
+
+        public RelayCommand SaveWarmUpCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    _chromaConfigurationModel.saveWarmUp();
                 });
             }
         }
@@ -185,6 +239,44 @@ namespace CroptimalLabSW.ViewModel
             ErrorMessageNewConfName = "";
             FontColorNewConfName = "Green";
             VisibilityErrorMessageNewConfName = false;
+            return true;
+        }
+
+        private bool checkSelectedConf()
+        {
+            int LEDsCount = 0;
+            bool[] usedDetectors = new bool[] { false, false, false, false, false, false, false, false };
+
+            for(int i = 0; i < SelectedLEDs.Count; i++)
+            {
+                if (SelectedLEDs[i])
+                {
+                    LEDsCount++;
+                    if(DetectorsList[i] == "")
+                    {
+                        dialogCoordinator.ShowMessageAsync(this, "Error", "Please select detector.", MessageDialogStyle.Affirmative);
+                        return false;
+                    }
+                    if(usedDetectors[i])
+                    {
+                        dialogCoordinator.ShowMessageAsync(this, "Error", "Detector can be used only one LED.", MessageDialogStyle.Affirmative);
+                        return false;
+                    }
+                    else
+                    {
+                        usedDetectors[i] = true;
+                    }
+                }
+                else
+                {
+                    DetectorsList[i] = "";
+                }
+            }
+            if(LEDsCount == 0)
+            {
+                dialogCoordinator.ShowMessageAsync(this, "Error", "You must select at least one LED.", MessageDialogStyle.Affirmative);
+                return false;
+            }
             return true;
         }
     }
