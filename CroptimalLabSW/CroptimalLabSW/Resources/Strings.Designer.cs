@@ -160,6 +160,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable worm up.
+        /// </summary>
+        public static string EnableWormUp {
+            get {
+                return ResourceManager.GetString("EnableWormUp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exists name.
         /// </summary>
         public static string ExistsName {
@@ -358,11 +367,20 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to df.
+        ///   Looks up a localized string similar to fr.
         /// </summary>
         public static string String1 {
             get {
                 return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 666.
+        /// </summary>
+        public static string String2 {
+            get {
+                return ResourceManager.GetString("String2", resourceCulture);
             }
         }
         

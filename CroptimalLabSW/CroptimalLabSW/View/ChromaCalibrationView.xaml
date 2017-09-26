@@ -5,11 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CroptimalLabSW.View"
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:converters="clr-namespace:CroptimalLabSW.Converters"
              xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" 
              d:DesignHeight="900" d:DesignWidth="1600"
              DataContext="{Binding Source={StaticResource Locator}, Path=ChromaCalibrationViewModel}">
     <UserControl.Resources>
+        <converters:StringToBrushConverter x:Key="stringToBrushConverter"/>
+        <converters:BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter"/>
+        <converters:IntToTextBox x:Key="intToTextBox"/>
+        <converters:DoubleToTextBox x:Key="doubleToTextBox"/>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -54,27 +59,29 @@
         <GroupBox x:Name="gBoxConf" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Configuration, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="3"/>
         <GroupBox x:Name="gBoxMeasure" Grid.Column="0" Grid.ColumnSpan="5" IsEnabled="False" Header="{Binding Measurment, Source={StaticResource LocStrings}}"  Grid.Row="4" Grid.RowSpan="5"/>
         <GroupBox x:Name="gBoxCalculate" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Calculation, Source={StaticResource LocStrings}}"  Grid.Row="9" Grid.RowSpan="3"/>
-        <GroupBox x:Name="gBoxSave" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Save, Source={StaticResource LocStrings}}"  Grid.Row="12" Grid.RowSpan="6"/>
+        <GroupBox x:Name="gBoxSave" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Save, Source={StaticResource LocStrings}}"  Grid.Row="12" Grid.RowSpan="6" Margin="100,0"/>
         <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Configuration, Source={StaticResource LocStrings}}"/>
-        <ComboBox Name="cBoxConf" ItemsSource="{Binding ConfigurationsList}" Grid.Column="2" Grid.Row="2"/>
-        <Button Name="btnSenConf" Grid.Column="3" Grid.Row="2" Content="{Binding Set, Source={StaticResource LocStrings}}"/>
+        <ComboBox Name="cBoxConf" ItemsSource="{Binding ConfigurationsList}" SelectedItem="{Binding SelectedConf}" Grid.Column="2" Grid.Row="2"/>
+        <CheckBox Name="chBoxWarmUp" IsChecked="{Binding WormUpEnabled}" Content="{Binding EnableWormUp, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
+        <Button Name="btnSenConf" Grid.Column="2" Grid.Row="3" Content="{Binding Set, Source={StaticResource LocStrings}}" Command="{Binding setConfCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Average, Source={StaticResource LocStrings}}"/>
-        <TextBox Name="tBoxAVG" Grid.Column="2" Grid.Row="5"/>
-        <Button Name="btnReadBG" Grid.Column="3" Grid.Row="5" Content="{Binding ReadBG, Source={StaticResource LocStrings}}"/>
+        <TextBox Name="tBoxAVG" Grid.Column="2" Grid.Row="5" Text="{Binding AVGNum, Converter={StaticResource intToTextBox}}" TextAlignment="Center" PreviewTextInput="PositiveNumberValidationTextBox"/>
+        <Button Name="btnReadBG" Grid.Column="3" Grid.Row="5" Content="{Binding ReadBG, Source={StaticResource LocStrings}}" Command="{Binding readBGCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="6" Text="{Binding Repetitions, Source={StaticResource LocStrings}}"/>
-        <TextBox Name="tBoxRep" Grid.Column="2" Grid.Row="6"/>
+        <TextBox Name="tBoxRep" Grid.Column="2" Grid.Row="6" Text="{Binding Repetitions, Converter={StaticResource intToTextBox}}" TextAlignment="Center" PreviewTextInput="PositiveNumberValidationTextBox"/>
         <TextBlock Grid.Column="1" Grid.Row="7" Text="{Binding Concentration, Source={StaticResource LocStrings}}"/>
-        <TextBox Name="tBoxConcentration" Grid.Column="2" Grid.Row="7"/>
-        <Button Name="btnMeasure" Grid.Column="2" Grid.Row="8" Content="{Binding Measure, Source={StaticResource LocStrings}}"/>
+        <TextBox Name="tBoxConcentration" Grid.Column="2" Grid.Row="7" Text="{Binding Concentration, Converter={StaticResource doubleToTextBox}}" TextAlignment="Center" PreviewTextInput="doubleValidationTextBox"/>
+        <Button Name="btnMeasure" Grid.Column="2" Grid.Row="8" Content="{Binding Measure, Source={StaticResource LocStrings}}" Command="{Binding measureCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="10" Text="{Binding PolynomicOrder, Source={StaticResource LocStrings}}"/>
-        <ComboBox x:Name="cBoxPolinomic" Grid.Column="2" Grid.Row="10"/>
-        <Button Name="btnCalculate" Grid.Column="3" Grid.Row="10" Content="{Binding Calculate, Source={StaticResource LocStrings}}"/>
+        <ComboBox x:Name="cBoxPolinomic" Grid.Column="2" Grid.Row="10" ItemsSource="{Binding PolynomialOrderOptions}" SelectedItem="{Binding PolynomialOrder}"/>
+        <Button Name="btnCalculate" Grid.Column="3" Grid.Row="10" Content="{Binding Calculate, Source={StaticResource LocStrings}}" Command="{Binding calculateCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="11" HorizontalAlignment="Right" Text="{Binding R2, Source={StaticResource LocStrings}}" Margin="5"/>
-        <TextBox Name="tBoxR" IsEnabled="False" Grid.Column="2" Grid.Row="11"/>
+        <TextBox Name="tBoxR" IsEnabled="False" Grid.Column="2" Grid.Row="11" Text="{Binding Regression, Converter={StaticResource doubleToTextBox}}"/>
         <RadioButton Name="rbtnNew" Grid.Column="1" Grid.Row="13" Content="{Binding New, Source={StaticResource LocStrings}}" VerticalAlignment="Center"/>
         <TextBlock Grid.Column="1" Grid.Row="14" Margin="30,0,0,0" Text="{Binding ElementName, Source={StaticResource LocStrings}}"/>
         <RadioButton Name="rbtnEdit" Grid.Column="1" Grid.Row="15" Content="{Binding Edit, Source={StaticResource LocStrings}}" VerticalAlignment="Center"/>
-        <TextBox Name="tBoxElementName" IsEnabled="{Binding ElementName=rbtnNew, Path=IsChecked}" Grid.Column="2" Grid.Row="14"/>
+        <TextBox Name="tBoxElementName" Text="{Binding NewElementName, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding FontColorElementName, Converter={StaticResource stringToBrushConverter}}" IsEnabled="{Binding ElementName=rbtnNew, Path=IsChecked}" Grid.Column="2" Grid.Row="14"/>
+        <TextBlock Name="tBlockElementNameValid" Text="{Binding ErrorMessageNewConfName}" Visibility="{Binding VisibilityErrorMessageElementName, Converter={StaticResource booleanToVisibilityConverter}}" />
         <TextBlock Grid.Column="1" Grid.Row="16" Text="{Binding SelectElement, Source={StaticResource LocStrings}}" Margin="30,0,0,0"/>
         <Button Name="btnSave" Grid.Column="2" Grid.Row="17" Content="{Binding SaveCalibration, Source={StaticResource LocStrings}}"/>
         <ComboBox x:Name="cBoxSelectElement" ItemsSource="{Binding ElementsList}" Grid.Column="2" Grid.Row="16" IsEnabled="{Binding ElementName=rbtnEdit, Path=IsChecked}" Margin="5,0,5,10"/>

@@ -100,6 +100,20 @@ namespace CroptimalLabSW.ViewModel
             }
         }
 
+        private MainWindowViewModel m_mainWindowViewModel;
+
+        public MainWindowViewModel MainWindowViewModel
+        {
+            get
+            {
+                if (m_mainWindowViewModel == null)
+                {
+                    m_mainWindowViewModel = new MainWindowViewModel();
+                }
+                return m_mainWindowViewModel;
+            }
+        }
+
         private DisplayViewModel m_displayViewModel;
 
         public DisplayViewModel DisplayViewModel

@@ -18,6 +18,7 @@ namespace CroptimalLabSW.Model.Chromameter
         private string _newConfName;
         private int _warmUpSec;
         private ObservableCollection<int> _confParams;
+        private ObservableCollection<bool> _selectedLEDs;
 
         private DBOptions m_DBOptions;
 
@@ -25,9 +26,11 @@ namespace CroptimalLabSW.Model.Chromameter
         {
             m_DBOptions = DBOptions.Instance();
             m_DBOptions.NewChromaConfigureAdded += updateConfigurationsList;
+            SelectedLEDs = new ObservableCollection<bool> { false, false, false, false, false, false, false, false };
             ConfParams = new ObservableCollection<int> { 0,0,0,0,0,0,0,0};
             WarmUpSec = m_DBOptions.getChromameterWarmUpSec();
             ConfNamesList = m_DBOptions.getChromameterConfigurationNames();
+            
         }
 
         public int WarmUpSec
@@ -56,7 +59,18 @@ namespace CroptimalLabSW.Model.Chromameter
             set
             {
                 _confParams = value;
+                updateSelectedLEDs();
                 RaisePropertyChanged("ConfParams");
+            }
+        }
+
+        public ObservableCollection<bool> SelectedLEDs
+        {
+            get { return _selectedLEDs; }
+            set
+            {
+                _selectedLEDs = value;
+                RaisePropertyChanged("SelectedLEDs");
             }
         }
 
@@ -96,9 +110,13 @@ namespace CroptimalLabSW.Model.Chromameter
             return m_DBOptions.insertNewChromaConfiguration(NewConfName, ConfParams);
         }
 
-        public void saveWarmUp()
+        public bool saveWarmUp()
         {
-            m_DBOptions.updateChromaWarmUpSec(WarmUpSec);
+            if (m_DBOptions.updateChromaWarmUpSec(WarmUpSec))
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool editNewConfiguration()
@@ -106,7 +124,20 @@ namespace CroptimalLabSW.Model.Chromameter
             return m_DBOptions.updateChromaConfiguration(SelectedConf, ConfParams);
         }
 
-
+        private void updateSelectedLEDs()
+        {
+            for(int i = 0; i < ConfParams.Count; i++)
+            {
+                if(ConfParams[i] > 0)
+                {
+                    SelectedLEDs[i] = true;
+                }
+                else
+                {
+                    SelectedLEDs[i] = false;  
+                }
+            }
+        }
 
         private void RaisePropertyChanged(string i_propertyName)
         {

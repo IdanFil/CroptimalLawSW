@@ -12,25 +12,35 @@ using OxyPlot;
 using OxyPlot.Axes;
 using CroptimalLabSW.Model.Chromameter;
 using System.Collections.ObjectModel;
+using MahApps.Metro.Controls.Dialogs;
+using System.Resources;
+using System.Reflection;
 
 namespace CroptimalLabSW.ViewModel
 {
     public class ChromaCalibrationViewModel : ViewModelBase
     {
-
-        private PlotModel _plotModel;
         private ChromaCalibrationModel m_chromaCalibrationModel;
+        private IDialogCoordinator dialogCoordinator;
+        private bool _wormUpEnabled;
+        private string _errorMessageElementName;
+        private bool _visibilityErrorMessageElementName;
+        private string _fontColorElementName;
+        private bool _enableAddNewElement;
+        
+        ResourceManager rm;
 
         #region Constructor
         public ChromaCalibrationViewModel()
         {
+            dialogCoordinator = DialogCoordinator.Instance;
             m_chromaCalibrationModel = new ChromaCalibrationModel();
+            rm = new ResourceManager("CroptimalLabSW.Resources.Strings", Assembly.GetExecutingAssembly());
+            WormUpEnabled = false;
             m_chromaCalibrationModel.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
             {
                 RaisePropertyChanged(e.PropertyName);
             };
-            _plotModel = new PlotModel();
-            SetUpModel();
         }
 
         #endregion
@@ -47,16 +57,15 @@ namespace CroptimalLabSW.ViewModel
         {
             get
             {
-                _plotModel = new PlotModel();
-                SetUpModel();
-                return _plotModel;
+                return m_chromaCalibrationModel.PlotModel;
             }
             set
             {
-                _plotModel = value;
+                m_chromaCalibrationModel.PlotModel = value;
                 RaisePropertyChanged("PlotModel");
             }
         }
+
         public string SelectedElement
         {
             get { return m_chromaCalibrationModel.SelectedElement; }
@@ -67,14 +76,25 @@ namespace CroptimalLabSW.ViewModel
             }
         }
 
-
-        public string ElementName
+        public bool WormUpEnabled
         {
-            get { return m_chromaCalibrationModel.ElementName; }
+            get { return _wormUpEnabled; }
             set
             {
-                m_chromaCalibrationModel.ElementName = value;
-                RaisePropertyChanged("ElementName");
+                _wormUpEnabled = value;
+                RaisePropertyChanged("WormUpEnabled");
+            }
+        }
+        
+
+
+        public string NewElementName
+        {
+            get { return m_chromaCalibrationModel.NewElementName; }
+            set
+            {
+                m_chromaCalibrationModel.NewElementName = value;
+                RaisePropertyChanged("NewElementName");
             }
         }
 
@@ -90,18 +110,18 @@ namespace CroptimalLabSW.ViewModel
         }
 
 
-        public int Polynomial
+        public int PolynomialOrder
         {
-            get { return m_chromaCalibrationModel.Polynomial; }
+            get { return m_chromaCalibrationModel.PolynomialOrder; }
             set
             {
-                m_chromaCalibrationModel.Polynomial = value;
-                RaisePropertyChanged("Polynomial");
+                m_chromaCalibrationModel.PolynomialOrder = value;
+                RaisePropertyChanged("PolynomialOrder");
             }
         }
 
 
-        public double Concentration
+        public double? Concentration
         {
             get { return m_chromaCalibrationModel.Concentration; }
             set
@@ -112,7 +132,7 @@ namespace CroptimalLabSW.ViewModel
         }
 
 
-        public int Repetitions
+        public int? Repetitions
         {
             get { return m_chromaCalibrationModel.Repetitions; }
             set
@@ -123,7 +143,7 @@ namespace CroptimalLabSW.ViewModel
         }
 
 
-        public double BGReading
+        public double[] BGReading
         {
             get { return m_chromaCalibrationModel.BGReading; }
             set
@@ -134,7 +154,18 @@ namespace CroptimalLabSW.ViewModel
         }
 
 
-        public int AVGNum
+        public ObservableCollection<Measurement> Measurments
+        {
+            get { return m_chromaCalibrationModel.Measurments; }
+            set
+            {
+                m_chromaCalibrationModel.Measurments = value;
+              //  printMeasurementsToGraph();
+                RaisePropertyChanged("Measurments");
+            }
+        }
+
+        public int? AVGNum
         {
             get { return m_chromaCalibrationModel.AVGNum; }
             set
@@ -144,13 +175,13 @@ namespace CroptimalLabSW.ViewModel
             }
         }
 
-        public string SelectedConfiguration
+        public string SelectedConf
         {
-            get { return m_chromaCalibrationModel.SelectedConfiguration; }
+            get { return m_chromaCalibrationModel.SelectedConf; }
             set
             {
-                m_chromaCalibrationModel.SelectedConfiguration = value;
-                RaisePropertyChanged("SelectedConfiguration");
+                m_chromaCalibrationModel.SelectedConf = value;
+                RaisePropertyChanged("SelectedConf");
             }
         }
 
@@ -164,16 +195,174 @@ namespace CroptimalLabSW.ViewModel
             }
         }
 
+        public ObservableCollection<int> PolynomialOrderOptions
+        {
+            get { return m_chromaCalibrationModel.PolynomialOrderOptions; }
+            set
+            {
+                m_chromaCalibrationModel.PolynomialOrderOptions = value;
+                RaisePropertyChanged("PolynomialOrderOptions");
+            }
+        }
+
+        public string ErrorMessageElementName
+        {
+            get { return _errorMessageElementName; }
+            set
+            {
+                _errorMessageElementName = value;
+                RaisePropertyChanged("ErrorMessageElementName");
+            }
+        }
+
+        public bool VisibilityErrorMessageElementName
+        {
+            get { return _visibilityErrorMessageElementName; }
+            set
+            {
+                _visibilityErrorMessageElementName = value;
+                RaisePropertyChanged("VisibilityErrorMessageElementName");
+            }
+        }
+
+        public string FontColorElementName
+        {
+            get { return _fontColorElementName; }
+            set
+            {
+                _fontColorElementName = value;
+                RaisePropertyChanged("FontColorElementName");
+            }
+        }
+
+        public bool EnableAddNewElement
+        {
+            get { return _enableAddNewElement; }
+            set
+            {
+                _enableAddNewElement = value;
+                RaisePropertyChanged("EnableAddNewElement");
+            }
+        }
+
+
         #endregion
 
-        private void SetUpModel()
+        #region Commands
+
+        public RelayCommand setConfCommand
         {
-            _plotModel.TextColor = OxyColors.SteelBlue;
-            var dateAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80, Title = "Abs", Position = AxisPosition.Bottom, AxislineColor = OxyColors.SteelBlue};
-            _plotModel.Axes.Add(dateAxis);
-            var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Concentration", Position = AxisPosition.Left, AxislineColor = OxyColors.SteelBlue };
-            _plotModel.Axes.Add(valueAxis);
+            get
+            {
+                return new RelayCommand(startConf);
+            }
         }
+
+        public RelayCommand readBGCommand
+        {
+            get
+            {
+                return new RelayCommand(m_chromaCalibrationModel.readBG);
+            }
+        }
+
+        public RelayCommand measureCommand
+        {
+            get
+            {
+                return new RelayCommand(measureAndPlotUpdate);
+            }
+        }
+
+        public RelayCommand calculateCommand
+        {
+            get
+            {
+                return new RelayCommand(m_chromaCalibrationModel.calculate);
+            }
+        }
+
+        #endregion
+
+        private void measureAndPlotUpdate()
+        {
+            m_chromaCalibrationModel.measure();
+            RaisePropertyChanged("PlotModel");
+        }
+
+
+        //private void printMeasurementsToGraph()
+        //{
+        //    OxyPlot.Series.LineSeries punktySerii = new OxyPlot.Series.LineSeries();
+        //    PlotModel.Series.Clear();
+        //    foreach (Measurement measure in Measurments)
+        //    {
+        //        punktySerii.Points.Add(new OxyPlot.DataPoint(measure.Concentration, measure.Absorption));
+        //    }
+        //    _plotModel.Series.Add(punktySerii);
+        //}
+
+        private void startConf()
+        {
+            if (m_chromaCalibrationModel.SelectedConf == "")
+            {
+                dialogCoordinator.ShowMessageAsync(this, "Error", "Please select configuration.", MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                m_chromaCalibrationModel.setConf();
+                if (_wormUpEnabled)
+                {
+                    //wait for warmup
+                }
+            }
+        }
+
+        private bool checkNewConfNameValidation()
+        {
+            if (NewElementName.Equals(""))
+            {
+                EnableAddNewElement = false;
+                ErrorMessageElementName = "";
+                FontColorElementName = "Black";
+                VisibilityErrorMessageElementName = true;
+                return false;
+            }
+            if (ConfNamesList.Contains(NewElementName))
+            {
+                //name exist
+                EnableAddNewElement = false;
+                ErrorMessageElementName = rm.GetString("ExistsName");
+                FontColorElementName = "Red";
+                VisibilityErrorMessageElementName = true;
+                return false;
+            }
+            if (NewElementName.Length == 1)
+            {
+                //short
+                EnableAddNewElement = false;
+                ErrorMessageElementName = rm.GetString("ShortName");
+                FontColorElementName = "Red";
+                VisibilityErrorMessageElementName = true;
+                return false;
+            }
+            if (!((NewElementName[0] >= 65 && NewElementName[0] <= 91) || (NewElementName[0] >= 97 && NewElementName[0] <= 122)))
+            {
+                //Invalid name
+                EnableAddNewElement = false;
+                ErrorMessageElementName = rm.GetString("InvalidName");
+                FontColorElementName = "Red";
+                VisibilityErrorMessageElementName = true;
+                return false;
+            }
+            EnableAddNewElement = true;
+            ErrorMessageElementName = "";
+            FontColorElementName = "Green";
+            VisibilityErrorMessageElementName = false;
+            return true;
+        }
+
+
 
     }
 }

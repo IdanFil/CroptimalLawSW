@@ -23,7 +23,7 @@
         <Style TargetType="mah:ToggleSwitch">
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
-        </Style> 
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -92,14 +92,14 @@
         <mah:ToggleSwitch Name="switchLEDF" IsChecked="{Binding SelectedLEDs[5], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="7"/>
         <mah:ToggleSwitch Name="switchLEDG" IsChecked="{Binding SelectedLEDs[6], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="8"/>
         <mah:ToggleSwitch Name="switchLEDH" IsChecked="{Binding SelectedLEDs[7], Mode=TwoWay}" Content="" Grid.Column="2" Grid.Row="9"/>
-        <ComboBox Name="cBoxLEDA" IsEnabled="{Binding ElementName=switchLEDA, Path=IsChecked}" SelectedItem="{Binding ConfParams[0]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="2"/>
-        <ComboBox Name="cBoxLEDB" IsEnabled="{Binding ElementName=switchLEDB, Path=IsChecked}" SelectedItem="{Binding ConfParams[1]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="3"/>
-        <ComboBox Name="cBoxLEDC" IsEnabled="{Binding ElementName=switchLEDC, Path=IsChecked}" SelectedItem="{Binding ConfParams[2]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="4"/>
-        <ComboBox Name="cBoxLEDD" IsEnabled="{Binding ElementName=switchLEDD, Path=IsChecked}" SelectedItem="{Binding ConfParams[3]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="5"/>
-        <ComboBox Name="cBoxLEDE" IsEnabled="{Binding ElementName=switchLEDE, Path=IsChecked}" SelectedItem="{Binding ConfParams[4]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="6"/>
-        <ComboBox Name="cBoxLEDF" IsEnabled="{Binding ElementName=switchLEDF, Path=IsChecked}" SelectedItem="{Binding ConfParams[5]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="7"/>
-        <ComboBox Name="cBoxLEDG" IsEnabled="{Binding ElementName=switchLEDG, Path=IsChecked}" SelectedItem="{Binding ConfParams[6]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="8"/>
-        <ComboBox Name="cBoxLEDH" IsEnabled="{Binding ElementName=switchLEDH, Path=IsChecked}" SelectedItem="{Binding ConfParams[7]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="9"/>
+        <ComboBox Name="cBoxLEDA" IsEnabled="{Binding ElementName=switchLEDA, Path=IsChecked}" SelectedIndex="{Binding ConfParams[0]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="2"/>
+        <ComboBox Name="cBoxLEDB" IsEnabled="{Binding ElementName=switchLEDB, Path=IsChecked}" SelectedIndex="{Binding ConfParams[1]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="3"/>
+        <ComboBox Name="cBoxLEDC" IsEnabled="{Binding ElementName=switchLEDC, Path=IsChecked}" SelectedIndex="{Binding ConfParams[2]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="4"/>
+        <ComboBox Name="cBoxLEDD" IsEnabled="{Binding ElementName=switchLEDD, Path=IsChecked}" SelectedIndex="{Binding ConfParams[3]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="5"/>
+        <ComboBox Name="cBoxLEDE" IsEnabled="{Binding ElementName=switchLEDE, Path=IsChecked}" SelectedIndex="{Binding ConfParams[4]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="6"/>
+        <ComboBox Name="cBoxLEDF" IsEnabled="{Binding ElementName=switchLEDF, Path=IsChecked}" SelectedIndex="{Binding ConfParams[5]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="7"/>
+        <ComboBox Name="cBoxLEDG" IsEnabled="{Binding ElementName=switchLEDG, Path=IsChecked}" SelectedIndex="{Binding ConfParams[6]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="8"/>
+        <ComboBox Name="cBoxLEDH" IsEnabled="{Binding ElementName=switchLEDH, Path=IsChecked}" SelectedIndex="{Binding ConfParams[7]}" ItemsSource="{Binding DetectorsList}" Grid.Column="4" Grid.Row="9"/>
         <!--<ComboBox x:Name="cBoxSelectElement" ItemsSource="{Binding ElementsList}" Grid.Column="3" Grid.Row="16" IsEnabled="{Binding ElementName=rbtnEdit, Path=IsChecked}" Margin="5"/>-->
         <ListBox Name="lBoxConfigure" ItemsSource="{Binding ConfNamesList}" SelectedItem="{Binding SelectedConf}" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="2" Grid.RowSpan="3"/>
         <Button Name="btnEdit" IsEnabled="{Binding EnableEditConf}" Content="{Binding EditConfiguration, Source={StaticResource LocStrings}}" Command="{Binding EditConfCommand}" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="5"/>

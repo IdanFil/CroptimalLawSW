@@ -6,12 +6,33 @@ using System.Threading.Tasks;
 
 namespace CroptimalLabSW.Model.Chromameter
 {
-    class Measurment
+    public class Measurement
     {
+        private int _numOfLeds;
         private double _concentration;
-        private double _detectorReading;
+        private double[] _detectorReading;
         private double _absorption;
         private int _repetition;
+
+        public Measurement()
+        {
+
+        }
+
+        public Measurement(int i_numOfLeds, double i_concentration, double[] i_detectorReading, double i_absorption, int i_repetition)
+        {
+            NumOfLeds = i_numOfLeds;
+            Concentration = i_concentration;
+            DetectorReading = i_detectorReading;
+            Absorption = i_absorption;
+            Repetition = i_repetition;
+        }
+
+        public int NumOfLeds
+        {
+            get { return _numOfLeds; }
+            set { _numOfLeds = value; }
+        }
 
         public double Concentration
         {
@@ -19,7 +40,7 @@ namespace CroptimalLabSW.Model.Chromameter
             set { _concentration = value; }
         }
 
-        public double DetectorReading
+        public double[] DetectorReading
         {
             get { return _detectorReading; }
             set { _detectorReading = value; }

@@ -51,6 +51,10 @@
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MathNet.Numerics, Version=3.20.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.20.0\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>True</Private>
@@ -89,19 +93,26 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\DoubleToTextBox.cs" />
+    <Compile Include="Converters\IntToTextBox.cs" />
     <Compile Include="Converters\StringToBrushConverter.cs" />
     <Compile Include="Converters\StringToUserControlConverter.cs" />
+    <Compile Include="Interfaces\IdeviceManager.cs" />
     <Compile Include="Messages\IsCheckedBottomMenuMessage.cs" />
     <Compile Include="Messages\VisibilityBottomMenuMessage.cs" />
     <Compile Include="Messages\SwitchDisplayMessage.cs" />
+    <Compile Include="Model\Chromameter\Calibration.cs" />
+    <Compile Include="Model\Chromameter\ChromaCalculator.cs" />
     <Compile Include="Model\Chromameter\ChromaCalibrationModel.cs" />
     <Compile Include="Model\Chromameter\ChromaManage.cs" />
     <Compile Include="Model\Chromameter\ChromaConfigurationModel.cs" />
-    <Compile Include="Model\Chromameter\Measurment.cs" />
+    <Compile Include="Model\DevicesController.cs" />
+    <Compile Include="Model\Chromameter\Measurement.cs" />
     <Compile Include="Model\DB\DBConnection.cs" />
     <Compile Include="Model\DB\DBOptions.cs" />
     <Compile Include="Model\Generel\Log.cs" />
     <Compile Include="Model\Generel\Logger.cs" />
+    <Compile Include="Model\MainWindowModel.cs" />
     <Compile Include="Resources\Strings.ru-RU.Designer.cs">
       <DependentUpon>Strings.ru-RU.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -117,7 +128,9 @@
     <Compile Include="ViewModel\ChromaConfigurationViewModel.cs" />
     <Compile Include="ViewModel\DisplayViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\ValidationManage.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\BottomMenuView.xaml.cs">
       <DependentUpon>BottomMenuView.xaml</DependentUpon>

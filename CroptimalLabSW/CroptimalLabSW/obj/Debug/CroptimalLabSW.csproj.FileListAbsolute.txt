@@ -57,3 +57,5 @@ D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\ru-RU\CroptimalLabSW.resources.dll
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.exe
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\obj\Debug\CroptimalLabSW.pdb
+D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\MathNet.Numerics.dll
+D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\bin\Debug\MathNet.Numerics.xml

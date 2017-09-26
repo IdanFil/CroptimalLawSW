@@ -27,14 +27,12 @@ namespace CroptimalLabSW.ViewModel
         private bool _enableAddConf;
         private bool _enableEditConf;
         private ObservableCollection<string> _detectorsList;
-        private ObservableCollection<bool> _selectedLEDs;
         ResourceManager rm;
 
         public ChromaConfigurationViewModel()
         {
             dialogCoordinator = DialogCoordinator.Instance;
-            DetectorsList = new ObservableCollection<string>() {"1","2","3","4","5","6","7","8"};
-            SelectedLEDs = new ObservableCollection<bool>() {false, false, false, false, false, false, false, false};
+            DetectorsList = new ObservableCollection<string>() {"","1","2","3","4","5","6","7","8"};
             rm = new ResourceManager("CroptimalLabSW.Resources.Strings", Assembly.GetExecutingAssembly());
             _chromaConfigurationModel = new ChromaConfigurationModel();
             _chromaConfigurationModel.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
@@ -44,6 +42,7 @@ namespace CroptimalLabSW.ViewModel
             FontColorNewConfName = "Black";
             VisibilityErrorMessageNewConfName = false;
         }
+
         public bool VisibilityErrorMessageNewConfName
         {
             get { return _visibilityErrorMessageNewConfName; }
@@ -86,11 +85,10 @@ namespace CroptimalLabSW.ViewModel
 
         public ObservableCollection<bool> SelectedLEDs
         {
-            get { return _selectedLEDs; }
+            get { return _chromaConfigurationModel.SelectedLEDs; }
             set
             {
-                _selectedLEDs = value;
-                RaisePropertyChanged("SelectedLEDs");
+                _chromaConfigurationModel.SelectedLEDs = value;
             }
         }
 
@@ -154,7 +152,8 @@ namespace CroptimalLabSW.ViewModel
         public ObservableCollection<int> ConfParams
         {
             get { return _chromaConfigurationModel.ConfParams; }
-            set { _chromaConfigurationModel.ConfParams = value; }
+            set { _chromaConfigurationModel.ConfParams = value;
+            }
         }
 
         public RelayCommand AddNewConfiguration
@@ -163,11 +162,22 @@ namespace CroptimalLabSW.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    if (checkSelectedConf())
+                    MessageDialogResult x = dialogCoordinator.ShowModalMessageExternal(this, "Message", "Are you sure you want to add configuration?", MessageDialogStyle.AffirmativeAndNegative);
+                    if (x == MessageDialogResult.Affirmative)
                     {
-                        _chromaConfigurationModel.addNewConfiguration();
-                        EnableAddConf = false;
-                        NewConfName = "";
+                        if (checkSelectedConf())
+                        {
+                            if (_chromaConfigurationModel.addNewConfiguration())
+                            {
+                                dialogCoordinator.ShowMessageAsync(this, "Message", "Configuration added.", MessageDialogStyle.Affirmative);
+                                EnableAddConf = false;
+                                NewConfName = "";
+                            }
+                            else
+                            {
+                                dialogCoordinator.ShowMessageAsync(this, "Error", "Add calibration failed, please check logs file.", MessageDialogStyle.Affirmative);
+                            }
+                        }
                     }
                 });
             }
@@ -179,9 +189,20 @@ namespace CroptimalLabSW.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    if (checkSelectedConf())
+                    MessageDialogResult x = dialogCoordinator.ShowModalMessageExternal(this, "Message", "Are you sure you want to update?", MessageDialogStyle.AffirmativeAndNegative);
+                    if (x == MessageDialogResult.Affirmative)
                     {
-                        _chromaConfigurationModel.editNewConfiguration();
+                        if (checkSelectedConf())
+                        {
+                            if (_chromaConfigurationModel.editNewConfiguration())
+                            {
+                                dialogCoordinator.ShowMessageAsync(this, "Message", "Configuration updated.", MessageDialogStyle.Affirmative);
+                            }
+                            else
+                            {
+                                dialogCoordinator.ShowMessageAsync(this, "Error", "Edit calibration failed, please check logs file.", MessageDialogStyle.Affirmative);
+                            }
+                        }
                     }
                 });
             }
@@ -193,7 +214,14 @@ namespace CroptimalLabSW.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    _chromaConfigurationModel.saveWarmUp();
+                    if(_chromaConfigurationModel.saveWarmUp())
+                    {
+                        dialogCoordinator.ShowMessageAsync(this, "Message", "Warm up time updated.", MessageDialogStyle.Affirmative);
+                    }
+                    else
+                    {
+                        dialogCoordinator.ShowMessageAsync(this, "Error", "Save warm up time failed, please check logs file.", MessageDialogStyle.Affirmative);
+                    }
                 });
             }
         }
@@ -245,31 +273,24 @@ namespace CroptimalLabSW.ViewModel
         private bool checkSelectedConf()
         {
             int LEDsCount = 0;
-            bool[] usedDetectors = new bool[] { false, false, false, false, false, false, false, false };
+            bool[] usedDetectors = new bool[] { false, false, false, false, false, false, false, false, false };
 
             for(int i = 0; i < SelectedLEDs.Count; i++)
             {
                 if (SelectedLEDs[i])
                 {
                     LEDsCount++;
-                    if(DetectorsList[i] == "")
+                    if(ConfParams[i] == 0)
                     {
                         dialogCoordinator.ShowMessageAsync(this, "Error", "Please select detector.", MessageDialogStyle.Affirmative);
                         return false;
                     }
-                    if(usedDetectors[i])
+                    if (usedDetectors[ConfParams[i]])
                     {
                         dialogCoordinator.ShowMessageAsync(this, "Error", "Detector can be used only one LED.", MessageDialogStyle.Affirmative);
                         return false;
                     }
-                    else
-                    {
-                        usedDetectors[i] = true;
-                    }
-                }
-                else
-                {
-                    DetectorsList[i] = "";
+                    usedDetectors[ConfParams[i]] = true;
                 }
             }
             if(LEDsCount == 0)

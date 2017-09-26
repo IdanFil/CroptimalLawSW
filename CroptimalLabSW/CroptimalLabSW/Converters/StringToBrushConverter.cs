@@ -28,6 +28,10 @@ namespace CroptimalLabSW.Converters
                     {
                         return Brushes.Green;
                     }
+                case "DarkBrush":
+                    {
+                        return Brushes.DarkGray;
+                    }
                 default:
                     {
                         return Brushes.Black;

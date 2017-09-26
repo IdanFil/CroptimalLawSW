@@ -226,10 +226,16 @@
   <data name="Set" xml:space="preserve">
     <value>Set</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>df</value>
-  </data>
   <data name="WorkWithDetector" xml:space="preserve">
     <value>Work with Detector:</value>
+  </data>
+  <data name="EnableWormUp" xml:space="preserve">
+    <value>Enable worm up</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value>fr</value>
+  </data>
+  <data name="String2" xml:space="preserve">
+    <value>666</value>
   </data>
 </root>

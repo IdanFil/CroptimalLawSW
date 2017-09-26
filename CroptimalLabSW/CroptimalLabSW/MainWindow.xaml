@@ -8,10 +8,16 @@
         xmlns:views="clr-namespace:CroptimalLabSW.View"
         mc:Ignorable="d"
         WindowState="Maximized" Icon="pack://application:,,,/Images/seedling-s.png"
-        Title="Croptimal Lab" Height="350" Width="525">
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Title="Croptimal Lab" Height="350" Width="525"
+        DataContext="{Binding Source={StaticResource Locator}, Path=MainWindowViewModel}">
     <Controls:MetroWindow.Resources>
     </Controls:MetroWindow.Resources>
-
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding WindowClosingCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
