@@ -22,12 +22,23 @@ namespace CroptimalLabSW.ViewModel
     {
         private ChromaCalibrationModel m_chromaCalibrationModel;
         private IDialogCoordinator dialogCoordinator;
-        private bool _wormUpEnabled;
+        private bool _warmUpEnabled;
         private string _errorMessageElementName;
         private bool _visibilityErrorMessageElementName;
         private string _fontColorElementName;
-        private bool _enableAddNewElement;
-        
+        private bool _enableElement;
+        private bool _newElementChecked;
+
+        private bool _setConfig_IsEnabled;
+
+        private bool _AVGtBox_IsEnabled;
+        private bool _repConcBox_IsEnabled;
+        private bool _readBG_IsEnabled;
+        private bool _measure_IsEnabled;
+        private bool _polyCBox_IsEnabled;
+        private bool _calculate_IsEnabled;
+        private bool _save_IsEnabled;
+
         ResourceManager rm;
 
         #region Constructor
@@ -36,7 +47,9 @@ namespace CroptimalLabSW.ViewModel
             dialogCoordinator = DialogCoordinator.Instance;
             m_chromaCalibrationModel = new ChromaCalibrationModel();
             rm = new ResourceManager("CroptimalLabSW.Resources.Strings", Assembly.GetExecutingAssembly());
-            WormUpEnabled = false;
+            WarmUpEnabled = false;
+            FontColorElementName = "Black";
+            VisibilityErrorMessageElementName = false;
             m_chromaCalibrationModel.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
             {
                 RaisePropertyChanged(e.PropertyName);
@@ -50,7 +63,11 @@ namespace CroptimalLabSW.ViewModel
         public ObservableCollection<string> ElementsList
         {
             get { return m_chromaCalibrationModel.ElementsList; }
-            set { m_chromaCalibrationModel.ElementsList = value; }
+            set
+            {
+                m_chromaCalibrationModel.ElementsList = value;
+                RaisePropertyChanged("ElementsList");
+            }
         }
 
         public PlotModel PlotModel
@@ -72,17 +89,21 @@ namespace CroptimalLabSW.ViewModel
             set
             {
                 m_chromaCalibrationModel.SelectedElement = value;
+                if(value != "")
+                {
+                    EnableElement = true;
+                }
                 RaisePropertyChanged("SelectedElement");
             }
         }
 
-        public bool WormUpEnabled
+        public bool WarmUpEnabled
         {
-            get { return _wormUpEnabled; }
+            get { return _warmUpEnabled; }
             set
             {
-                _wormUpEnabled = value;
-                RaisePropertyChanged("WormUpEnabled");
+                _warmUpEnabled = value;
+                RaisePropertyChanged("WarmUpEnabled");
             }
         }
         
@@ -94,6 +115,7 @@ namespace CroptimalLabSW.ViewModel
             set
             {
                 m_chromaCalibrationModel.NewElementName = value;
+                checkNewElementNameValidation();
                 RaisePropertyChanged("NewElementName");
             }
         }
@@ -215,6 +237,88 @@ namespace CroptimalLabSW.ViewModel
             }
         }
 
+        public bool SetConfig_IsEnabled
+        {
+            get { return _setConfig_IsEnabled; }
+            set
+            {
+                _setConfig_IsEnabled = value;
+                RaisePropertyChanged("SetConfigIsEnabled");
+            }
+        }
+
+        public bool AVGtBox_IsEnabled
+        {
+            get { return _AVGtBox_IsEnabled; }
+            set
+            {
+                _AVGtBox_IsEnabled = value;
+                RaisePropertyChanged("AVGtBox_IsEnabled");
+            }
+        }
+
+        public bool RepConcBox_IsEnabled
+        {
+            get { return _repConcBox_IsEnabled; }
+            set
+            {
+                _repConcBox_IsEnabled = value;
+                RaisePropertyChanged("RepConcBox_IsEnabled");
+            }
+        }
+
+        public bool ReadBG_IsEnabled
+        {
+            get { return _readBG_IsEnabled; }
+            set
+            {
+                _readBG_IsEnabled = value;
+                RaisePropertyChanged("ReadBG_IsEnabled");
+            }
+        }
+
+        public bool Measure_IsEnabled
+        {
+            get { return _measure_IsEnabled; }
+            set
+            {
+                _measure_IsEnabled = value;
+                RaisePropertyChanged("Measure_IsEnabled");
+            }
+        }
+
+        public bool PolyCBox_IsEnabled
+        {
+            get { return _polyCBox_IsEnabled; }
+            set
+            {
+                _polyCBox_IsEnabled = value;
+                RaisePropertyChanged("PolyCBox_IsEnabled");
+            }
+        }
+
+        public bool Calculate_IsEnabled
+        {
+            get { return _calculate_IsEnabled; }
+            set
+            {
+                _calculate_IsEnabled = value;
+                RaisePropertyChanged("Calculate_IsEnabled");
+            }
+        }
+
+        public bool Save_IsEnabled
+        {
+            get { return _save_IsEnabled; }
+            set
+            {
+                _save_IsEnabled = value;
+                RaisePropertyChanged("Save_IsEnabled");
+            }
+        }
+
+
+
         public bool VisibilityErrorMessageElementName
         {
             get { return _visibilityErrorMessageElementName; }
@@ -235,16 +339,42 @@ namespace CroptimalLabSW.ViewModel
             }
         }
 
-        public bool EnableAddNewElement
+        public bool EnableElement
         {
-            get { return _enableAddNewElement; }
+            get { return _enableElement; }
             set
             {
-                _enableAddNewElement = value;
-                RaisePropertyChanged("EnableAddNewElement");
+                _enableElement = value;
+                RaisePropertyChanged("EnableElement");
             }
         }
 
+        public bool NewElementChecked
+        {
+            get { return _newElementChecked; }
+            set
+            {
+                _newElementChecked = value;
+                if(_newElementChecked == true)
+                {
+                    EnableElement = false;
+                }
+                else
+                {
+                    NewElementName = "";
+                    if (SelectedElement != "")
+                    {
+                        EnableElement = true;
+                    }
+                    else
+                    {
+                        EnableElement = false;
+                    }
+                }
+                RaisePropertyChanged("NewElementChecked");
+            }
+        }
+        
 
         #endregion
 
@@ -282,7 +412,43 @@ namespace CroptimalLabSW.ViewModel
             }
         }
 
+        public RelayCommand saveCalibrationCommand
+        {
+            get
+            {
+                return new RelayCommand(saveCalibration);
+            }
+        }
+
+        
+
         #endregion
+
+        public void initPage()
+        {
+            SetConfig_IsEnabled = false;
+            Save_IsEnabled = false;
+            Calculate_IsEnabled = false;
+            PolyCBox_IsEnabled = false;
+            Measure_IsEnabled = false;
+            ReadBG_IsEnabled = false;
+            RepConcBox_IsEnabled = false;
+            AVGtBox_IsEnabled = false;
+
+            m_chromaCalibrationModel.initParameters();
+        }
+
+        private void saveCalibration()
+        {
+            if(_newElementChecked)
+            {
+                m_chromaCalibrationModel.addNewElement();
+            }
+            else
+            {
+                m_chromaCalibrationModel.modifyElement();
+            }
+        }
 
         private void measureAndPlotUpdate()
         {
@@ -311,27 +477,29 @@ namespace CroptimalLabSW.ViewModel
             else
             {
                 m_chromaCalibrationModel.setConf();
-                if (_wormUpEnabled)
+                if (_warmUpEnabled)
                 {
                     //wait for warmup
                 }
             }
         }
 
-        private bool checkNewConfNameValidation()
+        #region validation
+
+        private bool checkNewElementNameValidation()
         {
             if (NewElementName.Equals(""))
             {
-                EnableAddNewElement = false;
+                EnableElement = false;
                 ErrorMessageElementName = "";
                 FontColorElementName = "Black";
                 VisibilityErrorMessageElementName = true;
                 return false;
             }
-            if (ConfNamesList.Contains(NewElementName))
+            if (ElementsList.Contains(NewElementName))
             {
                 //name exist
-                EnableAddNewElement = false;
+                EnableElement = false;
                 ErrorMessageElementName = rm.GetString("ExistsName");
                 FontColorElementName = "Red";
                 VisibilityErrorMessageElementName = true;
@@ -340,7 +508,7 @@ namespace CroptimalLabSW.ViewModel
             if (NewElementName.Length == 1)
             {
                 //short
-                EnableAddNewElement = false;
+                EnableElement = false;
                 ErrorMessageElementName = rm.GetString("ShortName");
                 FontColorElementName = "Red";
                 VisibilityErrorMessageElementName = true;
@@ -349,20 +517,20 @@ namespace CroptimalLabSW.ViewModel
             if (!((NewElementName[0] >= 65 && NewElementName[0] <= 91) || (NewElementName[0] >= 97 && NewElementName[0] <= 122)))
             {
                 //Invalid name
-                EnableAddNewElement = false;
+                EnableElement = false;
                 ErrorMessageElementName = rm.GetString("InvalidName");
                 FontColorElementName = "Red";
                 VisibilityErrorMessageElementName = true;
                 return false;
             }
-            EnableAddNewElement = true;
+            EnableElement = true;
             ErrorMessageElementName = "";
             FontColorElementName = "Green";
             VisibilityErrorMessageElementName = false;
             return true;
         }
 
-
+        #endregion
 
     }
 }

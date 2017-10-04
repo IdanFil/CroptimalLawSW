@@ -229,8 +229,8 @@
   <data name="WorkWithDetector" xml:space="preserve">
     <value>Work with Detector:</value>
   </data>
-  <data name="EnableWormUp" xml:space="preserve">
-    <value>Enable worm up</value>
+  <data name="EnableWarmUp" xml:space="preserve">
+    <value>Enable warm up</value>
   </data>
   <data name="String1" xml:space="preserve">
     <value>fr</value>

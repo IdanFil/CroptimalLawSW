@@ -107,7 +107,7 @@ namespace CroptimalLabSW.Model.Chromameter
 
         public bool addNewConfiguration()
         {
-            return m_DBOptions.insertNewChromaConfiguration(NewConfName, ConfParams);
+            return m_DBOptions.insertChromaConfiguration(NewConfName, ConfParams);
         }
 
         public bool saveWarmUp()

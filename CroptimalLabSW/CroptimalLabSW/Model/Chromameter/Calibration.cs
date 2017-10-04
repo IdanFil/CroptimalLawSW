@@ -10,7 +10,7 @@ namespace CroptimalLabSW.Model.Chromameter
     class Calibration
     {
         private string _configurationName;
-        private int[] _configuration;
+        private ObservableCollection<int> _configuration;
         private ObservableCollection<Measurement> m_measurments;
         private double[] _backgroundReading;
         private int _polynomicOrder;
@@ -73,7 +73,7 @@ namespace CroptimalLabSW.Model.Chromameter
             set { _coefficientC = value; }
         }
 
-        public int[] Configuration
+        public ObservableCollection<int> Configuration
         {
             get { return _configuration; }
             set { _configuration = value; }

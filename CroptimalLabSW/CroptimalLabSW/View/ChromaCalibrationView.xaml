@@ -62,8 +62,8 @@
         <GroupBox x:Name="gBoxSave" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Save, Source={StaticResource LocStrings}}"  Grid.Row="12" Grid.RowSpan="6" Margin="100,0"/>
         <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Configuration, Source={StaticResource LocStrings}}"/>
         <ComboBox Name="cBoxConf" ItemsSource="{Binding ConfigurationsList}" SelectedItem="{Binding SelectedConf}" Grid.Column="2" Grid.Row="2"/>
-        <CheckBox Name="chBoxWarmUp" IsChecked="{Binding WormUpEnabled}" Content="{Binding EnableWormUp, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
-        <Button Name="btnSenConf" Grid.Column="2" Grid.Row="3" Content="{Binding Set, Source={StaticResource LocStrings}}" Command="{Binding setConfCommand}"/>
+        <CheckBox Name="chBoxWarmUp" IsChecked="{Binding WarmUpEnabled}" Content="{Binding EnableWarmUp, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
+        <Button Name="btnSenConf" Grid.Column="2" Grid.Row="3" Content="{Binding Set, Source={StaticResource LocStrings}}" IsEnabled="{Binding SetConfigIsEnabled}"  Command="{Binding setConfCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Average, Source={StaticResource LocStrings}}"/>
         <TextBox Name="tBoxAVG" Grid.Column="2" Grid.Row="5" Text="{Binding AVGNum, Converter={StaticResource intToTextBox}}" TextAlignment="Center" PreviewTextInput="PositiveNumberValidationTextBox"/>
         <Button Name="btnReadBG" Grid.Column="3" Grid.Row="5" Content="{Binding ReadBG, Source={StaticResource LocStrings}}" Command="{Binding readBGCommand}"/>
@@ -77,14 +77,14 @@
         <Button Name="btnCalculate" Grid.Column="3" Grid.Row="10" Content="{Binding Calculate, Source={StaticResource LocStrings}}" Command="{Binding calculateCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="11" HorizontalAlignment="Right" Text="{Binding R2, Source={StaticResource LocStrings}}" Margin="5"/>
         <TextBox Name="tBoxR" IsEnabled="False" Grid.Column="2" Grid.Row="11" Text="{Binding Regression, Converter={StaticResource doubleToTextBox}}"/>
-        <RadioButton Name="rbtnNew" Grid.Column="1" Grid.Row="13" Content="{Binding New, Source={StaticResource LocStrings}}" VerticalAlignment="Center"/>
+        <RadioButton Name="rbtnNew" Grid.Column="1" Grid.Row="13" Content="{Binding New, Source={StaticResource LocStrings}}" IsChecked="{Binding NewElementChecked, Mode=TwoWay}" VerticalAlignment="Center"/>
         <TextBlock Grid.Column="1" Grid.Row="14" Margin="30,0,0,0" Text="{Binding ElementName, Source={StaticResource LocStrings}}"/>
         <RadioButton Name="rbtnEdit" Grid.Column="1" Grid.Row="15" Content="{Binding Edit, Source={StaticResource LocStrings}}" VerticalAlignment="Center"/>
         <TextBox Name="tBoxElementName" Text="{Binding NewElementName, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding FontColorElementName, Converter={StaticResource stringToBrushConverter}}" IsEnabled="{Binding ElementName=rbtnNew, Path=IsChecked}" Grid.Column="2" Grid.Row="14"/>
-        <TextBlock Name="tBlockElementNameValid" Text="{Binding ErrorMessageNewConfName}" Visibility="{Binding VisibilityErrorMessageElementName, Converter={StaticResource booleanToVisibilityConverter}}" />
+        <TextBlock Name="tBlockElementNameValid" Text="{Binding ErrorMessageElementName}" Visibility="{Binding VisibilityErrorMessageElementName, Converter={StaticResource booleanToVisibilityConverter}}" Grid.Column="3" Grid.Row="14" Foreground="Red"/>
         <TextBlock Grid.Column="1" Grid.Row="16" Text="{Binding SelectElement, Source={StaticResource LocStrings}}" Margin="30,0,0,0"/>
-        <Button Name="btnSave" Grid.Column="2" Grid.Row="17" Content="{Binding SaveCalibration, Source={StaticResource LocStrings}}"/>
-        <ComboBox x:Name="cBoxSelectElement" ItemsSource="{Binding ElementsList}" Grid.Column="2" Grid.Row="16" IsEnabled="{Binding ElementName=rbtnEdit, Path=IsChecked}" Margin="5,0,5,10"/>
+        <Button Name="btnSave" Grid.Column="2" Grid.Row="17" Content="{Binding SaveCalibration, Source={StaticResource LocStrings}}"  IsEnabled="{Binding EnableElement}" Command="{Binding saveCalibrationCommand}" />
+        <ComboBox x:Name="cBoxSelectElement" ItemsSource="{Binding ElementsList}" SelectedItem="{Binding SelectedElement}" Grid.Column="2" Grid.Row="16" IsEnabled="{Binding ElementName=rbtnEdit, Path=IsChecked}" Margin="5,0,5,10"/>
         <oxy:PlotView x:Name="Plot1" Model="{Binding PlotModel}" Grid.Row="1" Grid.RowSpan="17" Grid.Column="5" Grid.ColumnSpan="6" Background="Transparent"/>
 
 

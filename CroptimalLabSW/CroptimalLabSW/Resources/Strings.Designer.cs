@@ -160,11 +160,11 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable worm up.
+        ///   Looks up a localized string similar to Enable warm up.
         /// </summary>
-        public static string EnableWormUp {
+        public static string EnableWarmUp {
             get {
-                return ResourceManager.GetString("EnableWormUp", resourceCulture);
+                return ResourceManager.GetString("EnableWarmUp", resourceCulture);
             }
         }
         

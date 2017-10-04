@@ -46,7 +46,7 @@ namespace CroptimalLabSW.Model.Chromameter
             m_calibration = new Calibration();
             m_chromaCalculator = new ChromaCalculator();
             m_DBOptions.NewChromaConfigureAdded += updateConfigurationsList;
-            _elementsList = new ObservableCollection<string>(m_DBOptions.getChromameterElementsName());
+            updateElementsList();
             ConfigurationsList = m_DBOptions.getChromameterConfigurationNames();
             PolynomialOrderOptions = new ObservableCollection<int> { 1, 2 };
         }
@@ -224,12 +224,31 @@ namespace CroptimalLabSW.Model.Chromameter
 
         public ObservableCollection<int> SelectedConfParams
         {
-            get { return _selectedConfParams; }
+            get { return m_calibration.Configuration; }
             set
             {
-                _selectedConfParams = value;
+                m_calibration.Configuration = value;
                 RaisePropertyChanged("SelectedConfParams");
             }
+        }
+
+        public void addNewElement()
+        {
+            if(m_DBOptions.insertChromaElement(NewElementName, m_calibration))
+            {
+                updateElementsList();
+                NewElementName = "";
+            }
+        }
+
+        public void modifyElement()
+        {
+            m_DBOptions.updateChromaElement(SelectedElement, m_calibration);
+        }
+
+        private void updateElementsList()
+        {
+            ElementsList = new ObservableCollection<string>(m_DBOptions.getChromameterElementsName());
         }
 
         private void SetUpModel()
@@ -273,6 +292,7 @@ namespace CroptimalLabSW.Model.Chromameter
 
         public void calculate()
         {
+            double[] confficients;
             double[] absArr = new double[Measurments.Count];
             double[] concArr = new double[Measurments.Count];
             for(int i = 0; i < Measurments.Count; i++)
@@ -282,6 +302,20 @@ namespace CroptimalLabSW.Model.Chromameter
             }
             Regression = GoodnessOfFit.RSquared(absArr, concArr);
             Regression = Math.Round(Regression, 6);
+            if(PolynomialOrder == 1)
+            {
+                confficients = Fit.Polynomial(absArr, concArr, PolynomialOrder);
+                m_calibration.CoefficientA = confficients[0];
+                m_calibration.CoefficientB = confficients[1];
+                m_calibration.CoefficientB = 0;
+            }
+            else if(PolynomialOrder == 2)
+            {
+                confficients = Fit.Polynomial(absArr, concArr, PolynomialOrder);
+                m_calibration.CoefficientA = confficients[0];
+                m_calibration.CoefficientB = confficients[1];
+                m_calibration.CoefficientC = confficients[2];
+            }
             Func<double,double> func = Fit.PolynomialFunc(absArr, concArr, PolynomialOrder);
             FunctionSeries d = new FunctionSeries(func, absArr.Min(), absArr.Max(), 0.0001f);
             m_polynomSeries.Points.Clear();
