@@ -106,6 +106,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Page.
+        /// </summary>
+        public static string ClearPage {
+            get {
+                return ResourceManager.GetString("ClearPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Concentration.
         /// </summary>
         public static string Concentration {
@@ -363,24 +372,6 @@ namespace CroptimalLabSW.Resources {
         public static string ShortName {
             get {
                 return ResourceManager.GetString("ShortName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to fr.
-        /// </summary>
-        public static string String1 {
-            get {
-                return ResourceManager.GetString("String1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 666.
-        /// </summary>
-        public static string String2 {
-            get {
-                return ResourceManager.GetString("String2", resourceCulture);
             }
         }
         

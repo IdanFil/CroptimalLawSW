@@ -14,7 +14,7 @@ namespace CroptimalLabSW.Model.Chromameter
         private ObservableCollection<Measurement> m_measurments;
         private double[] _backgroundReading;
         private int _polynomicOrder;
-        private double _regression;
+        private double? _regression;
         private string _elenemtName;
         private double _coefficientA;
         private double _coefficientB;
@@ -43,7 +43,7 @@ namespace CroptimalLabSW.Model.Chromameter
             set { _polynomicOrder = value; }
         }
 
-        public double Regression
+        public double? Regression
         {
             get { return _regression; }
             set { _regression = value; }

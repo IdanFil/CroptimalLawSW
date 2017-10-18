@@ -28,6 +28,8 @@ namespace CroptimalLabSW.ViewModel
         private string _fontColorElementName;
         private bool _enableElement;
         private bool _newElementChecked;
+        private bool _editElementChecked;
+        private int _selectedIndexConf;
 
         private bool _setConfig_IsEnabled;
 
@@ -49,6 +51,7 @@ namespace CroptimalLabSW.ViewModel
             rm = new ResourceManager("CroptimalLabSW.Resources.Strings", Assembly.GetExecutingAssembly());
             WarmUpEnabled = false;
             FontColorElementName = "Black";
+            SelectedIndexConf = -1;
             VisibilityErrorMessageElementName = false;
             m_chromaCalibrationModel.PropertyChanged += delegate(object sender, PropertyChangedEventArgs e)
             {
@@ -121,7 +124,7 @@ namespace CroptimalLabSW.ViewModel
         }
 
 
-        public double Regression
+        public double? Regression
         {
             get { return m_chromaCalibrationModel.Regression; }
             set
@@ -138,6 +141,14 @@ namespace CroptimalLabSW.ViewModel
             set
             {
                 m_chromaCalibrationModel.PolynomialOrder = value;
+                if (value != 0)
+                {
+                    Calculate_IsEnabled = true;
+                }
+                else
+                {
+                    Calculate_IsEnabled = false;
+                }
                 RaisePropertyChanged("PolynomialOrder");
             }
         }
@@ -149,6 +160,7 @@ namespace CroptimalLabSW.ViewModel
             set
             {
                 m_chromaCalibrationModel.Concentration = value;
+                checkAllowMeasure();
                 RaisePropertyChanged("Concentration");
             }
         }
@@ -160,6 +172,7 @@ namespace CroptimalLabSW.ViewModel
             set
             {
                 m_chromaCalibrationModel.Repetitions = value;
+                checkAllowMeasure();
                 RaisePropertyChanged("Repetitions");
             }
         }
@@ -193,6 +206,14 @@ namespace CroptimalLabSW.ViewModel
             set
             {
                 m_chromaCalibrationModel.AVGNum = value;
+                if (value != null && value != 0)
+                {
+                    ReadBG_IsEnabled = true;
+                }
+                else
+                {
+                    ReadBG_IsEnabled = false;
+                }
                 RaisePropertyChanged("AVGNum");
             }
         }
@@ -203,6 +224,14 @@ namespace CroptimalLabSW.ViewModel
             set
             {
                 m_chromaCalibrationModel.SelectedConf = value;
+                if(value != null && value != "")
+                {
+                    SetConfig_IsEnabled = true;
+                }
+                else
+                {
+                    SetConfig_IsEnabled = false;
+                }
                 RaisePropertyChanged("SelectedConf");
             }
         }
@@ -243,7 +272,7 @@ namespace CroptimalLabSW.ViewModel
             set
             {
                 _setConfig_IsEnabled = value;
-                RaisePropertyChanged("SetConfigIsEnabled");
+                RaisePropertyChanged("SetConfig_IsEnabled");
             }
         }
 
@@ -362,7 +391,7 @@ namespace CroptimalLabSW.ViewModel
                 else
                 {
                     NewElementName = "";
-                    if (SelectedElement != "")
+                    if (SelectedElement != "" && SelectedElement != null)
                     {
                         EnableElement = true;
                     }
@@ -374,8 +403,27 @@ namespace CroptimalLabSW.ViewModel
                 RaisePropertyChanged("NewElementChecked");
             }
         }
-        
+        public bool EditElementChecked
+        {
+            get { return _editElementChecked; }
+            set
+            {
+                _editElementChecked = value;
+                RaisePropertyChanged("EditElementChecked");
+            }
+        }
 
+        public int SelectedIndexConf
+        {
+            get { return _selectedIndexConf; }
+            set
+            {
+                _selectedIndexConf = value;
+                RaisePropertyChanged("SelectedIndexConf");
+            }
+        }
+
+        
         #endregion
 
         #region Commands
@@ -392,7 +440,7 @@ namespace CroptimalLabSW.ViewModel
         {
             get
             {
-                return new RelayCommand(m_chromaCalibrationModel.readBG);
+                return new RelayCommand(readBG);
             }
         }
 
@@ -408,7 +456,7 @@ namespace CroptimalLabSW.ViewModel
         {
             get
             {
-                return new RelayCommand(m_chromaCalibrationModel.calculate);
+                return new RelayCommand(calculate);
             }
         }
 
@@ -420,22 +468,42 @@ namespace CroptimalLabSW.ViewModel
             }
         }
 
-        
+        public RelayCommand clearPageCommand
+        {
+            get
+            {
+                return new RelayCommand(initPage);
+            }
+        }
 
+        
         #endregion
+
+        private void checkAllowMeasure()
+        {
+            if (m_chromaCalibrationModel.Repetitions != null && m_chromaCalibrationModel.Repetitions != 0 && m_chromaCalibrationModel.Concentration != null)
+            {
+                Measure_IsEnabled = true;
+            }
+            else
+            {
+                Measure_IsEnabled = false;
+            }
+        }
 
         public void initPage()
         {
-            SetConfig_IsEnabled = false;
             Save_IsEnabled = false;
             Calculate_IsEnabled = false;
             PolyCBox_IsEnabled = false;
             Measure_IsEnabled = false;
             ReadBG_IsEnabled = false;
             RepConcBox_IsEnabled = false;
-            AVGtBox_IsEnabled = false;
 
-            m_chromaCalibrationModel.initParameters();
+            NewElementChecked = false;
+            EditElementChecked = false;
+            
+            m_chromaCalibrationModel.clearCalibration();
         }
 
         private void saveCalibration()
@@ -454,6 +522,22 @@ namespace CroptimalLabSW.ViewModel
         {
             m_chromaCalibrationModel.measure();
             RaisePropertyChanged("PlotModel");
+            if (m_chromaCalibrationModel.Measurments.Count > 2)
+            {
+                PolyCBox_IsEnabled = true;
+            }
+        }
+
+        private void readBG()
+        {
+            RepConcBox_IsEnabled = true;
+            m_chromaCalibrationModel.readBG();
+        }
+
+        private void calculate()
+        {
+            m_chromaCalibrationModel.calculate();
+            Save_IsEnabled = true;
         }
 
 
@@ -477,6 +561,7 @@ namespace CroptimalLabSW.ViewModel
             else
             {
                 m_chromaCalibrationModel.setConf();
+                AVGtBox_IsEnabled = true;
                 if (_warmUpEnabled)
                 {
                     //wait for warmup

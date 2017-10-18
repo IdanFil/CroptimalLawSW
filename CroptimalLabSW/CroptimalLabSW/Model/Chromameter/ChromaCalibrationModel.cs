@@ -126,7 +126,7 @@ namespace CroptimalLabSW.Model.Chromameter
         }
 
 
-        public double Regression
+        public double? Regression
         {
             get { return m_calibration.Regression; }
             set
@@ -232,6 +232,30 @@ namespace CroptimalLabSW.Model.Chromameter
             }
         }
 
+
+        #endregion
+
+        public void clearCalibration()
+        {
+            string confName = SelectedConf;
+            m_calibration = new Calibration();
+            if (confName != null)
+            {
+                SelectedConf = confName;
+            }
+
+            //      SelectedConf = "";
+            AVGNum = null;
+            Repetitions = null;
+            Concentration = null;
+            Regression = null;//
+            Concentration = null;
+            NewElementName = "";
+            //      SelectedElement = "";
+
+            PlotModel.Series.Clear();
+        }
+
         public void addNewElement()
         {
             if(m_DBOptions.insertChromaElement(NewElementName, m_calibration))
@@ -301,7 +325,7 @@ namespace CroptimalLabSW.Model.Chromameter
                 concArr[i] = Measurments[i].Concentration;
             }
             Regression = GoodnessOfFit.RSquared(absArr, concArr);
-            Regression = Math.Round(Regression, 6);
+            Regression = Math.Round(Convert.ToDouble(Regression), 6);
             if(PolynomialOrder == 1)
             {
                 confficients = Fit.Polynomial(absArr, concArr, PolynomialOrder);
@@ -430,7 +454,6 @@ namespace CroptimalLabSW.Model.Chromameter
             ConfigurationsList = m_DBOptions.getChromameterConfigurationNames();
         }
 
-        #endregion
          
         private void RaisePropertyChanged(string i_propertyName)
         {

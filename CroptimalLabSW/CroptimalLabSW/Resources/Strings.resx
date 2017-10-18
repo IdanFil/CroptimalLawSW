@@ -232,10 +232,7 @@
   <data name="EnableWarmUp" xml:space="preserve">
     <value>Enable warm up</value>
   </data>
-  <data name="String1" xml:space="preserve">
-    <value>fr</value>
-  </data>
-  <data name="String2" xml:space="preserve">
-    <value>666</value>
+  <data name="ClearPage" xml:space="preserve">
+    <value>Clear Page</value>
   </data>
 </root>

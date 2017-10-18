@@ -16,7 +16,7 @@ namespace CroptimalLabSW.Converters
             {
                 return value.ToString();
             }
-            return Binding.DoNothing;
+            return "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -28,7 +28,7 @@ namespace CroptimalLabSW.Converters
             }
             if (data.Equals(string.Empty))
             {
-                return 0;
+                return null;
             }
             if (!string.IsNullOrEmpty(data))
             {
