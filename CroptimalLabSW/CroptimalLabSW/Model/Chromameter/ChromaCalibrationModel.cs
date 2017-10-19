@@ -278,12 +278,34 @@ namespace CroptimalLabSW.Model.Chromameter
         private void SetUpModel()
         {
             _plotModel = new PlotModel();
+            _plotModel.MouseDown += new EventHandler<OxyPlot.OxyMouseDownEventArgs>(removeMeasure);
             _plotModel.TextColor = OxyColors.SteelBlue;
             var dateAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, IntervalLength = 80, Title = "Abs", Position = AxisPosition.Bottom, AxislineColor = OxyColors.SteelBlue };
             _plotModel.Axes.Add(dateAxis);
             var valueAxis = new LinearAxis() { MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot, Title = "Concentration", Position = AxisPosition.Left, AxislineColor = OxyColors.SteelBlue };
             _plotModel.Axes.Add(valueAxis);
             initGraph();
+        }
+
+        private void removeMeasure(object sender, OxyPlot.OxyMouseDownEventArgs e)
+        {
+            if(e.ChangedButton == OxyMouseButton.Left)
+            {
+                if (e.HitTestResult != null)
+                {
+                    ScatterPoint Point = (ScatterPoint)e.HitTestResult.Item;
+                    foreach (Measurement measure in m_calibration.Measurments)
+                    {
+                        if (measure.Absorption == Point.X && measure.Concentration == Point.Y)
+                        {
+                            m_calibration.Measurments.Remove(measure);
+                            break;
+                        }
+                    }
+                    m_measureSeries.Points.Remove(Point);
+                    PlotModel.InvalidatePlot(true);
+                }
+            }
         }
 
         private void toRemove()
