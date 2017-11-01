@@ -147,6 +147,16 @@ namespace CroptimalLabSW.Model.Chromameter
             return measurmentsAVG;
         }
 
+        public ChromaResult measure(ObservableCollection<int> confParams, int NumToAVG, double[] BackgroundReading)
+        {
+            ChromaResult result = new ChromaResult();
+
+            // להמשיך מפה
+            // לבדוק מספק לדים דלוקים ולפעול בהתאם
+            return result;
+
+        }
+
         public void turnOffAllLEDs()
         {
             bool[] falseMask = new bool[m_maskPorts.Length];

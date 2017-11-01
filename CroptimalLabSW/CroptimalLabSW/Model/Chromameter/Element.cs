@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CroptimalLabSW.Model.Chromameter
 {
-    class Calibration
+    class Element
     {
         private string _configurationName;
         private ObservableCollection<int> _configuration;
@@ -20,7 +20,7 @@ namespace CroptimalLabSW.Model.Chromameter
         private double _coefficientB;
         private double _coefficientC;
 
-        public Calibration()
+        public Element()
         {
             m_measurments = new ObservableCollection<Measurement>();
         }

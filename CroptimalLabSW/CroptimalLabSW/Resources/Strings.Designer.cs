@@ -61,6 +61,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Absorption.
+        /// </summary>
+        public static string Absorption {
+            get {
+                return ResourceManager.GetString("Absorption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Configuration.
         /// </summary>
         public static string AddConfiguration {
@@ -115,6 +124,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Results.
+        /// </summary>
+        public static string ClearResults {
+            get {
+                return ResourceManager.GetString("ClearResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Concentration.
         /// </summary>
         public static string Concentration {
@@ -156,6 +174,15 @@ namespace CroptimalLabSW.Resources {
         public static string Elechem {
             get {
                 return ResourceManager.GetString("Elechem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Element.
+        /// </summary>
+        public static string Element {
+            get {
+                return ResourceManager.GetString("Element", resourceCulture);
             }
         }
         
@@ -232,11 +259,11 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Measurment.
+        ///   Looks up a localized string similar to Measurement.
         /// </summary>
-        public static string Measurment {
+        public static string Measurement {
             get {
-                return ResourceManager.GetString("Measurment", resourceCulture);
+                return ResourceManager.GetString("Measurement", resourceCulture);
             }
         }
         
@@ -313,6 +340,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sample ID.
+        /// </summary>
+        public static string SampleID {
+            get {
+                return ResourceManager.GetString("SampleID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -340,6 +376,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save Results.
+        /// </summary>
+        public static string SaveResults {
+            get {
+                return ResourceManager.GetString("SaveResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Element.
         /// </summary>
         public static string SelectElement {
@@ -358,6 +403,15 @@ namespace CroptimalLabSW.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set Element.
+        /// </summary>
+        public static string SetElement {
+            get {
+                return ResourceManager.GetString("SetElement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings {
@@ -372,6 +426,24 @@ namespace CroptimalLabSW.Resources {
         public static string ShortName {
             get {
                 return ResourceManager.GetString("ShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single Measurement.
+        /// </summary>
+        public static string SingleMeasure {
+            get {
+                return ResourceManager.GetString("SingleMeasure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo.
+        /// </summary>
+        public static string Undo {
+            get {
+                return ResourceManager.GetString("Undo", resourceCulture);
             }
         }
         

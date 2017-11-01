@@ -22,7 +22,7 @@ namespace CroptimalLabSW.Model.Chromameter
         private ChromaCalculator m_chromaCalculator;
 
         private PlotModel _plotModel = null;
-        private Calibration m_calibration;
+        private Element m_calibration;
         private int? _avgNum;
         private int? _repetitions;
         private double? _concentration;
@@ -43,7 +43,7 @@ namespace CroptimalLabSW.Model.Chromameter
         {
             m_DBOptions = DBOptions.Instance();
             m_chromaManage = ChromaManage.Instance();
-            m_calibration = new Calibration();
+            m_calibration = new Element();
             m_chromaCalculator = new ChromaCalculator();
             m_DBOptions.NewChromaConfigureAdded += updateConfigurationsList;
             updateElementsList();
@@ -238,7 +238,7 @@ namespace CroptimalLabSW.Model.Chromameter
         public void clearCalibration()
         {
             string confName = SelectedConf;
-            m_calibration = new Calibration();
+            m_calibration = new Element();
             if (confName != null)
             {
                 SelectedConf = confName;
@@ -252,8 +252,8 @@ namespace CroptimalLabSW.Model.Chromameter
             Concentration = null;
             NewElementName = "";
             //      SelectedElement = "";
-
-            PlotModel.Series.Clear();
+            m_measureSeries.Points.Clear();
+            PlotModel.InvalidatePlot(true);
         }
 
         public void addNewElement()
@@ -449,7 +449,7 @@ namespace CroptimalLabSW.Model.Chromameter
                 printMeasurementToGraph(measure);
             }
         }
-
+        
         private void twoLEDsMeasure()
         {
             Measurement measure = new Measurement();

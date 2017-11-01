@@ -16,7 +16,6 @@ namespace CroptimalLabSW.Model.Chromameter
 
         public Measurement()
         {
-
         }
 
         public Measurement(int i_numOfLeds, double i_concentration, double[] i_detectorReading, double i_absorption, int i_repetition)

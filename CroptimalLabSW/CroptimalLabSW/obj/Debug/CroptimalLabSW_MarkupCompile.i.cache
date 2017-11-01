@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GitHub\CroptimalLawSW\CroptimalLabSW\CroptimalLabSW\App.xaml
-8392398396
+9-2128140568
 
-47-1312123235
+51-1163724294
 751331595142
-Dictionaries\StandardStyles.xaml;MainWindow.xaml;View\BottomMenuView.xaml;View\ChromaCalibrationView.xaml;View\ChromaConfigurationView.xaml;View\ChromameterView.xaml;View\DisplayView.xaml;View\MenuView.xaml;
+Dictionaries\StandardStyles.xaml;MainWindow.xaml;View\BottomMenuView.xaml;View\ChromaCalibrationView.xaml;View\ChromaConfigurationView.xaml;View\ChromameterView.xaml;View\ChromaSingleView.xaml;View\DisplayView.xaml;View\MenuView.xaml;
 
-True
+False
 

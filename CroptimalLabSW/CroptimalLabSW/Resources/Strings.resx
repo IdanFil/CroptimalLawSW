@@ -150,8 +150,8 @@
   <data name="Measure" xml:space="preserve">
     <value>Measure</value>
   </data>
-  <data name="Measurment" xml:space="preserve">
-    <value>Measurment</value>
+  <data name="Measurement" xml:space="preserve">
+    <value>Measurement</value>
   </data>
   <data name="New" xml:space="preserve">
     <value>New</value>
@@ -234,5 +234,29 @@
   </data>
   <data name="ClearPage" xml:space="preserve">
     <value>Clear Page</value>
+  </data>
+  <data name="Element" xml:space="preserve">
+    <value>Element</value>
+  </data>
+  <data name="Absorption" xml:space="preserve">
+    <value>Absorption</value>
+  </data>
+  <data name="ClearResults" xml:space="preserve">
+    <value>Clear Results</value>
+  </data>
+  <data name="SampleID" xml:space="preserve">
+    <value>Sample ID</value>
+  </data>
+  <data name="SaveResults" xml:space="preserve">
+    <value>Save Results</value>
+  </data>
+  <data name="SetElement" xml:space="preserve">
+    <value>Set Element</value>
+  </data>
+  <data name="SingleMeasure" xml:space="preserve">
+    <value>Single Measurement</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Undo</value>
   </data>
 </root>

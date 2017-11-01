@@ -101,11 +101,13 @@
     <Compile Include="Messages\IsCheckedBottomMenuMessage.cs" />
     <Compile Include="Messages\VisibilityBottomMenuMessage.cs" />
     <Compile Include="Messages\SwitchDisplayMessage.cs" />
-    <Compile Include="Model\Chromameter\Calibration.cs" />
+    <Compile Include="Model\Chromameter\Element.cs" />
     <Compile Include="Model\Chromameter\ChromaCalculator.cs" />
     <Compile Include="Model\Chromameter\ChromaCalibrationModel.cs" />
     <Compile Include="Model\Chromameter\ChromaManage.cs" />
     <Compile Include="Model\Chromameter\ChromaConfigurationModel.cs" />
+    <Compile Include="Model\Chromameter\ChromaSingleModel.cs" />
+    <Compile Include="Model\Chromameter\ChromaResult.cs" />
     <Compile Include="Model\DevicesController.cs" />
     <Compile Include="Model\Chromameter\Measurement.cs" />
     <Compile Include="Model\DB\DBConnection.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="ViewModel\BottomMenuViewModel.cs" />
     <Compile Include="ViewModel\ChromaCalibrationViewModel.cs" />
     <Compile Include="ViewModel\ChromaConfigurationViewModel.cs" />
+    <Compile Include="ViewModel\ChromaSingleViewModel.cs" />
     <Compile Include="ViewModel\DisplayViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -143,6 +146,9 @@
     </Compile>
     <Compile Include="View\ChromameterView.xaml.cs">
       <DependentUpon>ChromameterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChromaSingleView.xaml.cs">
+      <DependentUpon>ChromaSingleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DisplayView.xaml.cs">
       <DependentUpon>DisplayView.xaml</DependentUpon>
@@ -179,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ChromameterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChromaSingleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -23,7 +23,7 @@ namespace CroptimalLabSW.Model.Chromameter
 
         public double calculateABS(double i_backgrounAVG, double i_measureAVG)
         {
-            return Math.Log10(i_backgrounAVG / i_measureAVG);
+            return -(Math.Log10(i_backgrounAVG / i_measureAVG));
         }
 
         public double calculateABS_NNO3(double[] i_backgrounAVG, double[] i_measureAVG)

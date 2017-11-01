@@ -56,14 +56,14 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <GroupBox x:Name="gBoxConf" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Configuration, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="3"/>
-        <GroupBox x:Name="gBoxMeasure" Grid.Column="0" Grid.ColumnSpan="5" IsEnabled="False" Header="{Binding Measurment, Source={StaticResource LocStrings}}"  Grid.Row="4" Grid.RowSpan="5"/>
+        <GroupBox x:Name="gBoxConf" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Settings, Source={StaticResource LocStrings}}"  Grid.Row="1" Grid.RowSpan="3"/>
+        <GroupBox x:Name="gBoxMeasure" Grid.Column="0" Grid.ColumnSpan="5" IsEnabled="False" Header="{Binding Measurement, Source={StaticResource LocStrings}}"  Grid.Row="4" Grid.RowSpan="5"/>
         <GroupBox x:Name="gBoxCalculate" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Calculation, Source={StaticResource LocStrings}}"  Grid.Row="9" Grid.RowSpan="3"/>
         <GroupBox x:Name="gBoxSave" Grid.Column="0" Grid.ColumnSpan="5" Header="{Binding Save, Source={StaticResource LocStrings}}"  Grid.Row="12" Grid.RowSpan="6" Margin="100,0"/>
         <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Configuration, Source={StaticResource LocStrings}}"/>
         <ComboBox Name="cBoxConf" ItemsSource="{Binding ConfigurationsList}" SelectedItem="{Binding SelectedConf}" SelectedIndex="{Binding SelectedIndexConf}" Grid.Column="2" Grid.Row="2"/>
         <CheckBox Name="chBoxWarmUp" IsChecked="{Binding WarmUpEnabled}" Content="{Binding EnableWarmUp, Source={StaticResource LocStrings}}" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center"/>
-        <Button Name="btnSenConf" Grid.Column="2" Grid.Row="3" Content="{Binding Set, Source={StaticResource LocStrings}}" IsEnabled="{Binding SetConfig_IsEnabled}"  Command="{Binding setConfCommand}"/>
+        <Button Name="btnSenConf" Grid.Column="2" Grid.Row="3" Content="{Binding Set, Source={StaticResource LocStrings}}" IsEnabled="{Binding SetConfigIsEnabled}"  Command="{Binding setConfCommand}"/>
         <TextBlock Grid.Column="1" Grid.Row="5" Text="{Binding Average, Source={StaticResource LocStrings}}"/>
         <TextBox Name="tBoxAVG" Grid.Column="2" Grid.Row="5" Text="{Binding AVGNum, Converter={StaticResource intToTextBox}, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding AVGtBox_IsEnabled}" TextAlignment="Center" PreviewTextInput="PositiveNumberValidationTextBox"/>
         <Button Name="btnReadBG" Grid.Column="3" Grid.Row="5" Content="{Binding ReadBG, Source={StaticResource LocStrings}}" IsEnabled="{Binding ReadBG_IsEnabled}" Command="{Binding readBGCommand}"/>

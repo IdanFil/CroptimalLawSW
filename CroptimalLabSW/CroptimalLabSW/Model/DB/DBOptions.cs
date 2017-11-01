@@ -72,6 +72,39 @@ namespace CroptimalLabSW.Model.DB
             return configure;
         }
 
+        public Element getElementParams(string i_elementName)
+        {
+            string query = "SELECT ElementName,Polynomial,CoefficientA,CoefficientB,CoefficientC,Regression,BackgroundReadingA,BackgroundReadingB,BackgroundReadingC,BackgroundReadingD,BackgroundReadingE,BackgroundReadingF,BackgroundReadingG,BackgroundReadingH,ConfigurationName,LedA,LedB,LedC,LedD,LedE,LedF,LedG,LedH  FROM CroptimalDB.dbo.ChromameterElements WHERE ElementName='" + i_elementName + "'";
+            DataTable DT = (DataTable)conn.ExecuteReadCommand(query);
+            Element element = new Element();
+
+            element.ElenemtName = i_elementName;
+            element.PolynomicOrder = Convert.ToInt16(DT.Rows[0][1]);
+            element.CoefficientA = Convert.ToDouble(DT.Rows[0][2]);
+            element.CoefficientB = Convert.ToDouble(DT.Rows[0][3]);
+            element.CoefficientC = Convert.ToDouble(DT.Rows[0][4]);
+            element.Regression = Convert.ToDouble(DT.Rows[0][5]);
+            element.BackgroundReading[0] = Convert.ToDouble(DT.Rows[0][6]);
+            element.BackgroundReading[1] = Convert.ToDouble(DT.Rows[0][7]);
+            element.BackgroundReading[2] = Convert.ToDouble(DT.Rows[0][8]);
+            element.BackgroundReading[3] = Convert.ToDouble(DT.Rows[0][9]);
+            element.BackgroundReading[4] = Convert.ToDouble(DT.Rows[0][10]);
+            element.BackgroundReading[5] = Convert.ToDouble(DT.Rows[0][11]);
+            element.BackgroundReading[6] = Convert.ToDouble(DT.Rows[0][12]);
+            element.BackgroundReading[7] = Convert.ToDouble(DT.Rows[0][13]);
+            element.ConfigurationName = Convert.ToString(DT.Rows[0][14]);
+            element.Configuration[0] = Convert.ToInt16(DT.Rows[0][15]);
+            element.Configuration[1] = Convert.ToInt16(DT.Rows[0][16]);
+            element.Configuration[2] = Convert.ToInt16(DT.Rows[0][17]);
+            element.Configuration[3] = Convert.ToInt16(DT.Rows[0][18]);
+            element.Configuration[4] = Convert.ToInt16(DT.Rows[0][19]);
+            element.Configuration[5] = Convert.ToInt16(DT.Rows[0][20]);
+            element.Configuration[6] = Convert.ToInt16(DT.Rows[0][21]);
+            element.Configuration[7] = Convert.ToInt16(DT.Rows[0][22]);
+
+            return element;
+        }
+
         public bool insertChromaConfiguration(string i_confName, ObservableCollection<int> i_confParams)
         {
             string query = "INSERT INTO CroptimalDB.dbo.ChromameterConfigurations (ConfigurationName,LedA,LedB,LedC,LedD,LedE,LedF,LedG,LedH)" +
@@ -93,7 +126,7 @@ namespace CroptimalLabSW.Model.DB
             return false;
         }
 
-        public bool insertChromaElement(string i_elementName, Calibration i_calibration)
+        public bool insertChromaElement(string i_elementName, Element i_calibration)
         {
             string query = "INSERT INTO CroptimalDB.dbo.ChromameterElements (ElementName,Polynomial,CoefficientA,CoefficientB,CoefficientC,Regression,BackgroundReadingA,BackgroundReadingB,BackgroundReadingC,BackgroundReadingD,BackgroundReadingE,BackgroundReadingF,BackgroundReadingG,BackgroundReadingH,ConfigurationName,LedA,LedB,LedC,LedD,LedE,LedF,LedG,LedH)" +
                 " VALUES ('" + i_elementName +
@@ -122,14 +155,14 @@ namespace CroptimalLabSW.Model.DB
 
             if (conn.ExecuteWriteCommand(query))
             {
-                insertChromaMeasurements(i_elementName, i_calibration.Measurments);
+                insertChromaCalibrationMeasurements(i_elementName, i_calibration.Measurments);
                 OnNewChromaConfigureAdded(new EventArgs());
                 return true;
             }
             return false;
         }
 
-        public bool insertChromaMeasurements(string i_elementName, ObservableCollection<Measurement> i_measurements)
+        public bool insertChromaCalibrationMeasurements(string i_elementName, ObservableCollection<Measurement> i_measurements)
         {
             for (int i = 0; i < i_measurements.Count; i++)
             {
@@ -152,8 +185,32 @@ namespace CroptimalLabSW.Model.DB
             return true;
         }
 
-        
-        public bool updateChromaElement(string i_elementName, Calibration i_calibration)
+        public bool insertChromaSampleMeasurements(string i_elementName, ObservableCollection<ChromaResult> i_measurements)
+        {
+            for (int i = 0; i < i_measurements.Count; i++)
+            {
+                string query = "INSERT INTO CroptimalDB.dbo.ChromameterResults (SampleID,ElementName,Concentration,Absorption,Repetition,DetectorReadingA,DetectorReadingB,DetectorReadingC,DetectorReadingD,DetectorReadingE,DetectorReadingF,DetectorReadingG,DetectorReadingH)" +
+                    " VALUES ('" + i_measurements[i].SampleID +
+                    "', '" + i_elementName +
+                    "', '" + i_measurements[i].Concentration +
+                    "', '" + i_measurements[i].Absorption +
+                    "', '" + i_measurements[i].Repetition +
+                    "', '" + i_measurements[i].DetectorReading[0] +
+                    "', '" + i_measurements[i].DetectorReading[1] +
+                    "', '" + i_measurements[i].DetectorReading[2] +
+                    "', '" + i_measurements[i].DetectorReading[3] +
+                    "', '" + i_measurements[i].DetectorReading[4] +
+                    "', '" + i_measurements[i].DetectorReading[5] +
+                    "', '" + i_measurements[i].DetectorReading[6] +
+                    "', '" + i_measurements[i].DetectorReading[7] + "')";
+
+                conn.ExecuteWriteCommand(query);
+            }
+            return true;
+        }
+
+
+        public bool updateChromaElement(string i_elementName, Element i_calibration)
         {
             string query = "UPDATE CroptimalDB.dbo.ChromameterElements SET " +
                 "Polynomial='" + i_calibration.PolynomicOrder +
@@ -182,14 +239,14 @@ namespace CroptimalLabSW.Model.DB
 
             if (conn.ExecuteWriteCommand(query))
             {
-                deleteChromaMeasureByElementName(i_elementName);
-                insertChromaMeasurements(i_elementName, i_calibration.Measurments);
+                deleteChromaCalibrationMeasureByElementName(i_elementName);
+                insertChromaCalibrationMeasurements(i_elementName, i_calibration.Measurments);
                 return true;
             }
             return false; ;
         }
 
-        public bool deleteChromaMeasureByElementName(string i_elementName)
+        public bool deleteChromaCalibrationMeasureByElementName(string i_elementName)
         {
             string query = "DELETE FROM CroptimalDB.dbo.ChromameterMeasurements WHERE ElementName = '" + i_elementName + "'";
             return conn.ExecuteWriteCommand(query);

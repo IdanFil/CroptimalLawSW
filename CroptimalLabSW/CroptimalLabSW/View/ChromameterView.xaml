@@ -27,7 +27,9 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Single">
-                <Grid/>
+                <Grid Name="singleGrid">
+                    <local:ChromaSingleView/>
+                </Grid>
             </TabItem>
             <TabItem Header="Real Time">
                 <Grid/>
